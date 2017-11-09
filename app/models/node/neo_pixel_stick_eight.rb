@@ -19,6 +19,10 @@ module Node
       Apiotics.sync(self)
     end
     
+    # def synchronize
+    #   for :neo_pixel_stick_eight :led_index.all do |update|
+        ##update.led_color.all = "255"
+        ##
     private
   
     def extract
