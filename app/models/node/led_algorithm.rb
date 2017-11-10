@@ -23,7 +23,7 @@ def led_algorithm
         
           
       #       <td class='node-neo_pixel_stick_eight-led_color'>
-      # change this        <%= object.neo_pixel_stick_eight.led_color = 500%>
+      # change this        <%= object.neo_pixel_stick_eight.led_color %>
       #       </td>
           
       #       <td class='node-neo_pixel_stick_eight-led_index'>

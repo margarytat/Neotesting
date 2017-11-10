@@ -1,6 +1,11 @@
 module Node
   class NodesController < ApplicationController
     before_action :set_node, only: [:show, :edit, :update, :destroy]
+    helper_method :show_colors, :update_colors
+
+    def show_colors
+    end
+
 
     # GET /alert/leds
     def index
