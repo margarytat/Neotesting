@@ -1,5 +1,6 @@
 def led_algorithm
-	#do something
+end
+	# do something
 	#<% @nodes.each do |object| %>
       # <tr id='<%= object.apiotics_instance %>'>
       #   <td>

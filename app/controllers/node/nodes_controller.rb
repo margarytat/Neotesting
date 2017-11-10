@@ -1,10 +1,9 @@
 module Node
   class NodesController < ApplicationController
     before_action :set_node, only: [:show, :edit, :update, :destroy]
-    helper_method :show_colors, :update_colors
+    helper_method :show_colors
 
-    def show_colors
-    end
+    
 
 
     # GET /alert/leds
@@ -51,11 +50,16 @@ module Node
       redirect_to nodes_url, notice: 'node was successfully destroyed.'
     end
 
+    def led_algorithm
+      @nodes = ::Node::Node.all
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_node
         @node = ::Node::Node.find(params[:id])
       end
+
 
       # Only allow a trusted parameter "white list" through.
       def node_params
