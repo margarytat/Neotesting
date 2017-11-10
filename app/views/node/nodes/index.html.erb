@@ -98,8 +98,12 @@
         
         <td>
           <%= link_to "Edit", edit_node_path(object)%>
-          <%= link_to "Show", node_path(object) %>
+          <%= link_to "Display", node_path(object) %>
+         
         </td>
+        <th>
+           <%= link_to 'Light-Show', lightshow_path %>
+        </th>
       </tr>
     <% end %>
   </tbody>
