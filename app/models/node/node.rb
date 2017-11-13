@@ -16,13 +16,15 @@ module Node
 	  	FROM node_neo_pixel_stick_eight_led_index_logs i
 	  	INNER JOIN node_neo_pixel_stick_eight_led_color_logs c ON c.id = i.id  
 	  		AND c.neo_pixel_stick_eight_id = i.neo_pixel_stick_eight_id 
+	  	JOIN node_nodes n ON n.id = c.neo_pixel_stick_eight_id
 	    WHERE i.led_index = #{light_index}
+	    AND n.apiotics_instance = \"#{self.apiotics_instance}\"
 	    ORDER BY i.id DESC 
 	    LIMIT 1
 	  SQL
-	  
-	  	color = Node.find_by_sql(sql).first.try(:led_color)
-	  	return color
+
+  	color = Node.find_by_sql(sql).first.try(:led_color)
+  	return color
   end
 
   end
