@@ -22,63 +22,36 @@
           Led
         </th>
         <%= form.simple_fields_for :led do |fields| %>
-          
-          
-            
               <td>
                 <%= fields.input :led_state %>
               </td>
-            
-            
-          
         <% end %>
       </tr>
-    
       <tr>
         <th rowspan='1'>
           Button
         </th>
         <%= form.simple_fields_for :button do |fields| %>
-          
-          
-            
               <td>
                 <%= fields.input :safe %>
-              </td>
-            
-            
-          
+              </td> 
         <% end %>
       </tr>
-    
       <tr>
         <th rowspan='2'>
           NeoPixelStickEight
         </th>
         <%= form.simple_fields_for :neo_pixel_stick_eight do |fields| %>
-          
-          
-            
+            <td>
+              <%= fields.input :led_index %>
+            </td>
+            <tr>
               <td>
                 <%= fields.input :led_color %>
               </td>
-            
-            
-          
-            
-              <tr>
-            
-              <td>
-                <%= fields.input :led_index %>
-              </td>
-            
-              </tr>
-            
-            
-          
+            </tr> 
         <% end %>
       </tr>
-    
       <tr>
         <th>
           &nbsp;
