@@ -3,31 +3,22 @@ module Node
     before_action :set_node, only: [:show, :edit, :update, :destroy]
     helper_method :show_colors
 
-    
-
-
-    # GET /alert/leds
     def index
       @nodes = ::Node::Node.all
     end
 
-    # GET /alert/leds/1
     def show
     end
 
-    # GET /alert/leds/new
     def new
       redirect_to nodes_url, notice: 'You are not authorized to do that.'
     end
 
-    # GET /alert/leds/1/edit
     def edit
     end
 
-    # POST /alert/leds
     def create
       @node = ::Node::Node.new(node_params)
-
       if @node.save
         redirect_to node_path(@node), notice: 'Node was successfully created.'
       else
@@ -35,7 +26,6 @@ module Node
       end
     end
 
-    # PATCH/PUT /alert/leds/1
     def update
       if @node.update(node_params)
         redirect_to node_path(@node), notice: 'Node was successfully updated.'
@@ -44,7 +34,6 @@ module Node
       end
     end
 
-    # DELETE /alert/leds/1
     def destroy
       @node.destroy
       redirect_to nodes_url, notice: 'node was successfully destroyed.'
