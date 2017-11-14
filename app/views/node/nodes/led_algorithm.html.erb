@@ -1,9 +1,10 @@
 <%= link_to 'Home', nodes_path %>
 <%= @nodes.each do |node| %>
-	<%= (0..7).each do |i|%>
-		<%= node.neo_pixel_stick_eight.led_index = i %>
-    <%= node.neo_pixel_stick_eight.led_color = 10 + i %>
+	<%= (0..7).each do |i| %>
+	<%= node.neo_pixel_stick_eight.led_index = i %>
+    <%= node.neo_pixel_stick_eight.led_color = 244 + i %>
     <%= node.save %>
+    <%= sleep(0.3) %>
     <!--<%= node.neo_pixel_stick_eight.led_index = 2 %>
     <%= node.neo_pixel_stick_eight.led_color = 65288 - 1 %>
     <%= node.save %>

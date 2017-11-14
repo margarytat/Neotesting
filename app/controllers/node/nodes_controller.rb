@@ -42,6 +42,9 @@ module Node
     def led_algorithm
       @nodes = ::Node::Node.all
     end
+    def all_on
+      @nodes = ::Node::Node.all
+    end
 
     private
       # Use callbacks to share common setup or constraints between actions.

@@ -21,5 +21,12 @@ module Node
  		end 
 	end 
   end
+  def all_on
+    @nodes = ::Node::Node.all
+    @nodes.each do |node| 
+      (0..7).each do |i| 
+      end 
+    end
+  end 
     
 end
