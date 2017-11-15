@@ -28,5 +28,8 @@ module Node
       end 
     end
   end 
+  def all_off
+    @nodes = ::Node::Node.all
+  end 
     
 end

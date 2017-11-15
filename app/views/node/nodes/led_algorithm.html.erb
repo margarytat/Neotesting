@@ -1,32 +1,7 @@
 <%= link_to 'Home', nodes_path %>
 <%= @nodes.each do |node| %>
-	<%= (0..7).each do |i| %>
-	<%= node.neo_pixel_stick_eight.led_index = i %>
-    <%= node.neo_pixel_stick_eight.led_color = 244 + i %>
-    <%= node.save %>
-    <%= sleep(0.3) %>
-    <!--<%= node.neo_pixel_stick_eight.led_index = 2 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 1 %>
-    <%= node.save %>
-    <%= node.neo_pixel_stick_eight.led_index = 0 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 2 %>
-    <%= node.save %>
-    <%= node.neo_pixel_stick_eight.led_index = 3 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 3 %>
-    <%= node.save %>
-    <%= node.neo_pixel_stick_eight.led_index = 4 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 4 %>
-    <%= node.save %>
-    <%= node.neo_pixel_stick_eight.led_index = 5 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 5 %>
-    <%= node.save %>
-    <%= node.neo_pixel_stick_eight.led_index = 6 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 6 %>
-    <%= node.save %>
-    <%= node.neo_pixel_stick_eight.led_index = 7 %>
-    <%= node.neo_pixel_stick_eight.led_color = 65288 - 7 %>
-    <%= node.save %> -->
-   <% end %>
+    <%= node.Rainbow %>
+
 <% end %>
 <h1> 
 	This is the page where our algorithm will run

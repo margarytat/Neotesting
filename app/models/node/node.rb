@@ -26,6 +26,27 @@ module Node
   	color = Node.find_by_sql(sql).first.try(:led_color)
   	return color
   end
+  def Rainbow
+    array = {
+      0 => [148, 0, 211],
+      1 => [75, 0, 130],
+      2 => [0, 0, 255],
+      3 => [0, 255, 0],
+      4 => [255, 255, 0],
+      5 => [255, 127, 0],
+      6 => [255,0,0]
+      }
+    (0..50).each do |j|
+      x = j%7
+      y = j%8
+      self.neo_pixel_stick_eight.led_index = y
+      self.neo_pixel_stick_eight.led_color = ((array[x][0] * 256**2) + (array[x][1] * 256) + (array[x][2]))
+      self.save
+      sleep(0.1)
+
+    end
+
+  end
 
   end
 end
