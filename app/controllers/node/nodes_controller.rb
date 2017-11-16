@@ -1,6 +1,6 @@
 module Node
   class NodesController < ApplicationController
-    before_action :set_node, only: [:show, :edit, :update, :destroy]
+    before_action :set_node, only: [:show, :edit, :update, :destroy, :commands]
     helper_method :show_colors
 
     def index
@@ -39,6 +39,9 @@ module Node
       redirect_to nodes_url, notice: 'node was successfully destroyed.'
     end
 
+    def commands
+    end
+
     def led_algorithm
       @nodes = ::Node::Node.all
     end
@@ -57,5 +60,6 @@ module Node
       def node_params
         params.fetch(:node_node, {}).permit(:id, :apiotics_instance, :led_attributes => ["led_state", "id"], :button_attributes => ["safe", "id"], :neo_pixel_stick_eight_attributes => ["led_color", "led_index", "id"])
       end
+
   end
 end

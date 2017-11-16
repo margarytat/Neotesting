@@ -62,22 +62,22 @@
         <td>
           <%= object.name %>
         </td>
-            <td class='node-led-led_state'>
-              <%= object.led.led_state %>
-            </td>
-            <td class='node-button-safe'>
-              <%= object.button.safe %>
-            </td>
-            <td class='node-neo_pixel_stick_eight-led_index'>
-              <%= object.neo_pixel_stick_eight.led_index %>
-            </td>
-            <td class='node-neo_pixel_stick_eight-led_color'>
-              <%= object.neo_pixel_stick_eight.led_color %>
-            </td>
+          <td class='node-led-led_state'>
+            <%= object.led.led_state %>
+          </td>
+          <td class='node-button-safe'>
+            <%= object.button.safe %>
+          </td>
+          <td class='node-neo_pixel_stick_eight-led_index'>
+            <%= object.neo_pixel_stick_eight.led_index %>
+          </td>
+          <td class='node-neo_pixel_stick_eight-led_color'>
+            <%= object.neo_pixel_stick_eight.led_color %>
+          </td>
         <td>
           <%= link_to "Edit", edit_node_path(object)%>
           <%= link_to "Display", node_path(object) %>
-         
+          <%= link_to "Commands", commands_node_path(object) %>
         </td>
         <th>
            <%= link_to "Led Algorithm", led_algorithm_path %>

@@ -54,30 +54,21 @@
       <td>
         <%= @node.name %>
       </td>
-          <td class='node-led-led_state'>
-            <%= @node.led.led_state %>
-          </td>
-          <td class='node-button-safe'>
-            <%= @node.button.safe %>
-          </td>
-          <td class='node-neo_pixel_stick_eight-led_index'>
-            <% i = 0 %>
-            <%= i %>
-          </td>
-          <td class='node-neo_pixel_stick_eight-led_color'>
-            <%= @node.getCurrentColor(i) %>
-          </td>
+      <td class='node-led-led_state'>
+        <%= @node.led.led_state %>
+      </td>
+      <td class='node-button-safe'>
+        <%= @node.button.safe %>
+      </td>
+      <td class='node-neo_pixel_stick_eight-led_index'>               
+        <%= @node.neo_pixel_stick_eight.led_index %>
+      </td>
+      <td class='node-neo_pixel_stick_eight-led_color'>    
+        <%= @node.neo_pixel_stick_eight.led_color %>    
+      </td>   
+        
+
     </tr>
-    <% (1..7).each do |i| %>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><%= i %></td>
-        <td><%= @node.getCurrentColor(i) %></td>
-      </tr>
-    <% end %>
   </tbody>
 </table>
 <%= link_to 'Edit', edit_node_path(@node) %> |
