@@ -26,6 +26,7 @@ module Node
   	color = Node.find_by_sql(sql).first.try(:led_color)
   	return color
   end
+  
   def Rainbow
     array = {
       0 => [148, 0, 211],
