@@ -1,6 +1,6 @@
 module Node
   class NodesController < ApplicationController
-    before_action :set_node, only: [:show, :edit, :update, :destroy, :commands]
+    before_action :set_node, only: [:show, :edit, :update, :destroy, :commands, :rainbow, :bounce]
     helper_method :show_colors
 
     def index
@@ -45,10 +45,19 @@ module Node
     def led_algorithm
       @nodes = ::Node::Node.all
     end
+    
     def all_on
       @nodes = ::Node::Node.all
     end
-    
+
+    def rainbow
+      @node.rainbow
+    end
+
+    def bounce
+      @node.bounce
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_node

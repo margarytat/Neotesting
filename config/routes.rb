@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   scope module: :node do 
 		resources :nodes do 
 			get 'commands', on: :member
+			post 'rainbow', on: :member
+			post 'bounce', on: :member
 		end
 	end
 

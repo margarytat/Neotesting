@@ -26,8 +26,8 @@ module Node
   	color = Node.find_by_sql(sql).first.try(:led_color)
   	return color
   end
-  
-  def Rainbow
+
+  def rainbow
     array = {
       0 => [148, 0, 211],
       1 => [75, 0, 130],
@@ -46,6 +46,31 @@ module Node
       sleep(0.1)
 
     end
+    
+  def bounce
+   array = {
+     0 => [0, 255, 0],
+     1 => [0, 0, 255],
+     2 => [0, 255, 0],
+     3 => [0, 0, 255],
+     4 => [0, 255, 0],
+     5 => [0, 0, 255],
+     6 => [0, 255, 0],
+     7 => [0, 0, 255]
+     }
+
+    (0..7).each do |j|
+    self.neo_pixel_stick_eight.led_color = ((array[j][0] * 256**2) + (array[j][1] * 256) + (array[j][2]))
+    self.neo_pixel_stick_eight.led_index = j
+    sleep(0.01)
+    end
+
+    (6).downto(0).each do |j|
+    self.neo_pixel_stick_eight.led_color = ((array[j][0] * 256**2) + (array[j][1] * 256) + (array[j][2]))
+    self.neo_pixel_stick_eight.led_index = j
+    sleep(0.01)
+    end
+  end
 
   end
 
