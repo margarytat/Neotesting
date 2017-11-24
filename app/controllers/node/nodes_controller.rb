@@ -1,6 +1,6 @@
 module Node
   class NodesController < ApplicationController
-    before_action :set_node, only: [:show, :edit, :update, :destroy, :commands, :rainbow, :bounce]
+    before_action :set_node, only: [:show, :edit, :update, :destroy, :commands, :rainbow, :bounce, :interface]
     helper_method :show_colors
 
     def index
@@ -56,6 +56,11 @@ module Node
 
     def bounce
       @node.bounce
+    end
+
+    def interface
+      method_name = @node.convert_index_to_interface_name(15)
+      redirect_to nodes_url, notice: method_name
     end
 
     private

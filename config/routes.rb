@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
   scope module: :node do 
 		resources :nodes do 
 			get 'commands', on: :member
 			post 'rainbow', on: :member
 			post 'bounce', on: :member
+			post 'interface', on: :member
 		end
 	end
 

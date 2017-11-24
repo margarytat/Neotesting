@@ -7,9 +7,6 @@
   <thead>
     <tr>
       <th style="border: 1px solid black;">
-        Id
-      </th>
-      <th style="border: 1px solid black;">
         Name
       </th>
       
@@ -33,9 +30,6 @@
       <th>
         &nbsp;
       </th>
-      <th>
-        &nbsp;
-      </th>
           <th>
             led_state
           </th>
@@ -56,9 +50,6 @@
   <tbody>
     <% @nodes.each do |object| %>
       <tr id='<%= object.apiotics_instance %>'>
-        <td>
-          <%= object.apiotics_instance %>
-        </td>
         <td>
           <%= object.name %>
         </td>

@@ -44,9 +44,9 @@ module Node
       self.neo_pixel_stick_eight.led_color = ((array[x][0] * 256**2) + (array[x][1] * 256) + (array[x][2]))
       self.save
       sleep(0.1)
-
     end
-    
+  end
+
   def bounce
    array = {
      0 => [0, 255, 0],
@@ -60,18 +60,26 @@ module Node
      }
 
     (0..7).each do |j|
-    self.neo_pixel_stick_eight.led_color = ((array[j][0] * 256**2) + (array[j][1] * 256) + (array[j][2]))
-    self.neo_pixel_stick_eight.led_index = j
-    sleep(0.01)
+      self.neo_pixel_stick_eight.led_color = ((array[j][0] * 256**2) + (array[j][1] * 256) + (array[j][2]))
+      self.neo_pixel_stick_eight.led_index = j
+      self.save
+      sleep(0.1)
     end
 
     (6).downto(0).each do |j|
-    self.neo_pixel_stick_eight.led_color = ((array[j][0] * 256**2) + (array[j][1] * 256) + (array[j][2]))
-    self.neo_pixel_stick_eight.led_index = j
-    sleep(0.01)
+      self.neo_pixel_stick_eight.led_color = ((array[j][0] * 256**2) + (array[j][1] * 256) + (array[j][2]))
+      self.neo_pixel_stick_eight.led_index = j
+      self.save
+      sleep(0.1)
     end
   end
 
+  def convert_index_to_interface_name(num)
+    # handle negative numbers and those above 239
+    interface = "led_" << num.to_s
+    return interface
+
+    # interfaces led_0 through led_239; each will take an integer color value
   end
 
   end
