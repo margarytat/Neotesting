@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123230847) do
+ActiveRecord::Schema.define(version: 20171124173601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_button_safe_logs", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_button_safe_logs", force: :cascade do |t|
     t.boolean "safe"
     t.boolean "safe_ack"
     t.boolean "safe_complete"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_buttons", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_buttons", force: :cascade do |t|
     t.boolean "safe"
     t.boolean "safe_ack"
     t.boolean "safe_complete"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_led_led_state_logs", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_led_led_state_logs", force: :cascade do |t|
     t.boolean "led_state"
     t.boolean "led_state_ack"
     t.boolean "led_state_complete"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_leds", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_leds", force: :cascade do |t|
     t.boolean "led_state"
     t.boolean "led_state_ack"
     t.boolean "led_state_complete"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_neo_pixel_stick_eight_led_color_logs", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_neo_pixel_stick_eight_led_color_logs", force: :cascade do |t|
     t.bigint "led_color"
     t.boolean "led_color_ack"
     t.boolean "led_color_complete"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_neo_pixel_stick_eight_led_index_logs", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_neo_pixel_stick_eight_led_index_logs", force: :cascade do |t|
     t.bigint "led_index"
     t.boolean "led_index_ack"
     t.boolean "led_index_complete"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_neo_pixel_stick_eights", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_neo_pixel_stick_eights", force: :cascade do |t|
     t.bigint "led_color"
     t.boolean "led_color_ack"
     t.boolean "led_color_complete"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20171123230847) do
     t.datetime "updated_at"
   end
 
-  create_table "node_nodes", id: :bigint, default: nil, force: :cascade do |t|
+  create_table "node_nodes", force: :cascade do |t|
     t.text "apiotics_instance"
     t.text "name"
     t.datetime "created_at"
