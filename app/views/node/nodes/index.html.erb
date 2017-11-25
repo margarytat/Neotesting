@@ -3,28 +3,21 @@
   Nodes
 </h1>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th style="border: 1px solid black;">
-        Id
-      </th>
-      <th style="border: 1px solid black;">
         Name
       </th>
-      
-        <th colspan='1' style="border: 1px solid black;">
-          Led
-        </th>
-      
-        <th colspan='1' style="border: 1px solid black;">
-          Button
-        </th>
-      
-        <th colspan='2' style="border: 1px solid black;">
-          NeoPixelStickEight
-        </th>
-      
+      <th colspan='1' style="border: 1px solid black;">
+        Led
+      </th>
+      <th colspan='1' style="border: 1px solid black;">
+        Button
+      </th>
+      <th colspan='2' style="border: 1px solid black;">
+        NeoPixelStickEight
+      </th>
       <th style="border: 1px solid black;">
         &nbsp;
       </th>
@@ -34,20 +27,17 @@
         &nbsp;
       </th>
       <th>
-        &nbsp;
+        led_state
       </th>
-          <th>
-            led_state
-          </th>
-          <th>
-            safe
-          </th>
-          <th>
-            led_index
-          </th>
-          <th>
-            led_color
-          </th>
+      <th>
+        safe
+      </th>
+      <th>
+        led_index
+      </th>
+      <th>
+        led_color
+      </th>
       <th>
         &nbsp;
       </th>
@@ -56,9 +46,6 @@
   <tbody>
     <% @nodes.each do |object| %>
       <tr id='<%= object.apiotics_instance %>'>
-        <td>
-          <%= object.apiotics_instance %>
-        </td>
         <td>
           <%= object.name %>
         </td>
