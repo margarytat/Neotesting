@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-<h1>
+<h2>
   Nodes
-</h1>
+</h2>
 
 <table class='table'>
   <thead>
@@ -66,10 +65,6 @@
           <%= link_to "Display", node_path(object) %>
           <%= link_to "Commands", commands_node_path(object) %>
         </td>
-        <th>
-           <%= link_to "Led Algorithm", led_algorithm_path %>
-           <%= link_to "Turn all Leds on", all_on_path %>
-        </th>
       </tr>
     <% end %>
   </tbody>

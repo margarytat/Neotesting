@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <h1>
   Node
 </h1>
@@ -6,29 +5,20 @@
   <thead>
     <tr>
       <th style="border: 1px solid black;">
-        Id
-      </th>
-      <th style="border: 1px solid black;">
         Name
       </th>
-      
         <th colspan='1' style="border: 1px solid black;">
           Led
         </th>
-      
         <th colspan='1' style="border: 1px solid black;">
           Button
         </th>
-      
         <th colspan='2' style="border: 1px solid black;">
           NeoPixelStickEight
         </th>
       
     </tr>
     <tr>
-      <th>
-        &nbsp;
-      </th>
       <th>
         &nbsp;
       </th>
@@ -49,9 +39,6 @@
   <tbody>
     <tr id='<%= @node.apiotics_instance %>'>
       <td>
-        <%= @node.apiotics_instance %>
-      </td>
-      <td>
         <%= @node.name %>
       </td>
       <td class='node-led-led_state'>
@@ -66,8 +53,6 @@
       <td class='node-neo_pixel_stick_eight-led_color'>    
         <%= @node.neo_pixel_stick_eight.led_color %>    
       </td>   
-        
-
     </tr>
   </tbody>
 </table>

@@ -15,21 +15,11 @@ module Node
   	@nodes = ::Node::Node.all
   	@nodes.each do |node| 
     	(0..7).each do |i| 
-	 	  node.neo_pixel_stick_eight.led_index = i 
-     	node.neo_pixel_stick_eight.led_color = 255 - i
-
- 		end 
-	end 
+  	 	  node.neo_pixel_stick_eight.led_index = i 
+       	node.neo_pixel_stick_eight.led_color = 255 - i
+ 		 end 
+	 end 
   end
-  def all_on
-    @nodes = ::Node::Node.all
-    @nodes.each do |node| 
-      (0..7).each do |i| 
-      end 
-    end
-  end 
-  def all_off
-    @nodes = ::Node::Node.all
-  end 
+
     
 end
