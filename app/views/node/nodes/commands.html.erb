@@ -1,6 +1,26 @@
-<h1>LED commands</h1>
+<h2>Led commands</h2>
 
-<%= button_to "Rainbow", action: "rainbow" %>
+<div class='container'>
+	<%= button_to "Rainbow", action: "rainbow" %>
+	<%= button_to "Bounce", action: "bounce" %><br/>
 
-<%= button_to "Bounce", action: "bounce" %>
+	<!-- Button trigger modal -->
+	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target=".snake-form">
+	    Snake
+	</button>
+	<%= render 'snake-modal' %>
 
+
+	<!--<div class="btn-group">
+	<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Snake  <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a href="#">Action</a></li>
+	    <li><a href="#">Another action</a></li>
+	    <li><a href="#">Something else here</a></li>
+	    <li><a href="#">Separated link</a></li>
+	  </ul>
+	</div>
+</div>-->
+<%= link_to 'Back', nodes_path %>

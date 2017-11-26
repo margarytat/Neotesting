@@ -30,11 +30,15 @@ $jumbotron-padding: 			10px;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #ffffcc;
+	color: #ffffcc;
 }
 
 .alert {
 	padding :	5px;
+}
+
+.node-row-cell {
+	border-top-color: 	000000;
 }
 
 body {
