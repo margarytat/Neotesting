@@ -35,7 +35,6 @@ only screen and (max-width: 760px),
 	tr { border: 1px solid #ccc; }
 	
 	td { 
-		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee; 
 		position: relative;
@@ -43,9 +42,7 @@ only screen and (max-width: 760px),
 	}
 	
 	td:before { 
-		/* Now like a table header */
 		position: absolute;
-		/* Top/left values mimic padding */
 		top: 6px;
 		left: 6px;
 		width: 45%; 
@@ -54,6 +51,7 @@ only screen and (max-width: 760px),
 	}
 	td:nth-of-type(1):before { content: "Name"; }
 	td:nth-of-type(2):before { content: "Led State"; }
-	td:nth-of-type(3):before { content: "Button safe"; }
+	td:nth-of-type(3):before { content: "Button Safe"; }
 	td:nth-of-type(4):before { content: "Led Index"; }
 	td:nth-of-type(5):before { content: "Led Color"; }
+}
