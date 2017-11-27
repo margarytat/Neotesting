@@ -1,7 +1,48 @@
-<h1>This is where we will be displaying the commands page</h1>
-<%= button_to "Rainbow", action: "rainbow" %>
+<h2>Led commands</h2>
+<div class='container'>
+	<select id="commands" onchange="displayForm()">
+		<option value="rainbow_form">Rainbow</option>
+		<option value="bounce_form">Bounce</option>
+		<option value="snake_form">Snake</option>
+	</select>
+	<%= link_to 'Back', nodes_path %>
+	<div name="rainbow_form" id="rainbow_form" class="form-toggle" style="display:none">
+		<form role="form" >
+			<button type="button" class="btn cancel-button">Cancel</button>
+			<%= button_to "Rainbow", action: "rainbow" %>
+		</form>
+	</div>
+	<div name="bounce_form" id="bounce_form" class="form-toggle" style="display:none">
+		<form role="form">
+			<button type="button" class="btn cancel-button">Cancel</button> 
+			<%= button_to "Bounce", action: "bounce" %>
+		</form>
+	</div>
+	<div name="snake_form" id="snake_form" class="form-toggle" style="display:none">
+		<form role="form">
+			<div>
+			  <span><label for="length">Length</label></span>
+			  <span><input type="number" id="length" /></span>
+			</div>
+			<div>
+			  <span><label for="snake_color" >Color</label></span>
+			  <span><input type="color" id="snake_color" />
+			</div>
+			<div>
+			  <button type="button" class="btn cancel-button" >Cancel</button>
+			  <button type="submit" class="btn btn-primary">Start</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	function displayForm() {
+		var elems = document.getElementsByClassName("form-toggle");
+		for (var i=0;i<elems.length;i+=1){
+  		elems[i].style.display = "none";
+		}
+    var x = document.getElementById("commands").value;
+    document.getElementById(x).style.display = "block";
+}
 
-<%= button_to "Bounce", action: "bounce" %>
-
-<%= button_to "Interface", action: "interface" %>
-
+</script>
