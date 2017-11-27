@@ -1,6 +1,6 @@
 <h2>Led commands</h2>
 <div class='container'>
-	<select id="commands" onchange="displayForm()">
+	<select id="commands">
 		<option value="rainbow_form">Rainbow</option>
 		<option value="bounce_form">Bounce</option>
 		<option value="snake_form">Snake</option>
@@ -36,13 +36,14 @@
 	</div>
 </div>
 <script>
-	function displayForm() {
-		var elems = document.getElementsByClassName("form-toggle");
-		for (var i=0;i<elems.length;i+=1){
-  		elems[i].style.display = "none";
-		}
-    var x = document.getElementById("commands").value;
-    document.getElementById(x).style.display = "block";
-}
+	$(function(){
+	    $('#commands').change(function() {
+	        $('.form-toggle').hide();
+	        $('#' + $(this).val()).show();
+	    });
+    });
 
+    $(document).ready(function(){
+    	$('#commands').trigger('change');
+    });
 </script>
