@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  scope module: :wire do 
+		resources :wires
+	end
   devise_for :users
   scope module: :node do 
 		resources :nodes do 
