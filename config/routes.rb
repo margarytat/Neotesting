@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  scope module: :wire do 
-		resources :wires
+  scope module: :cord do 
+		resources :cords
 	end
   devise_for :users
   scope module: :node do 
