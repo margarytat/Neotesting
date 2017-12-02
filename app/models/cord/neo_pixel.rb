@@ -546,26 +546,11 @@ module Cord
       self.save
     end
 
-    def each_on(color_code)
-      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
-      t.each do |i|
-        unless i == "pixels"
-          self.send(i+"=",color_code)
-          self.save
-        end
-      end
-    end
-
     def all_off
       self.all_on(0)
     end
-
-    def each_off
-      self.each_on(0)
-    end
   
     def big_rainbow
-      leds = (0..239)
       colors = {
             0 => [148, 0, 211],
             1 => [75, 0, 130],
@@ -576,7 +561,7 @@ module Cord
             6 => [255,0,0]
             }
             
-      stripe_width = leds.size/colors.size  
+      stripe_width = @size/colors.size  
       led_index = 0
 
       colors.each_with_index {|(k,v), c|
@@ -584,6 +569,7 @@ module Cord
             color = v[1] * 256**2 + v[0] * 256 + v[2]
             self.send(to_target(led_index)+"=", color)
             self.save
+            sleep(0.03)
             led_index+=1
           end
       }

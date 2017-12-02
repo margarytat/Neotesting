@@ -1,0 +1,41 @@
+<h1>
+  Cords
+</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="border: 1px solid black;">
+        Property
+      </th>
+      <th style="border: 1px solid black;">
+        Value
+      </th>
+    </tr>
+   </thead>
+   <tbody>
+   	<% @cords.each do |object| %>
+   	<tr>
+   		<td> Id
+   		</td>
+   		<td>
+          <%= object.apiotics_instance %>
+      </td>
+    </tr>
+    <tr>
+   		<td> Name
+   		</td>
+   		<td>
+          <%= object.name %>
+      </td>
+    </tr>
+    <%= (0..239).each do |i| %>
+      <tr> pixel_#{i} </tr>
+      <% end %>
+    <tr>
+   	</tbody>
+
+
+
+     <td class='cord-neo_pixel-pixel_252'>
+              <%= object.neo_pixel.pixel_252 %>
+      </td>
