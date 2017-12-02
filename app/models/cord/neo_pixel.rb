@@ -521,13 +521,93 @@ module Cord
     message: "%{value} is not within the range 0..16777215" }
     validates :pixels, inclusion: { in: 1..256,
     message: "%{value} is not within the range 1..256" }
+
+    def set_size(size)
+      @size = size
+      self.send("pixels=", size)
+      self.save
+    end
+
+    def all_on(color_code)
+      @buffer = 40
+      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
+      msg_size = 0
+      t.each do |i|
+        unless i == "pixels"
+          if msg_size == @buffer
+            self.save
+            #sleep(1.0)
+            msg_size = 0
+          end
+          self.send(i+"=",color_code)
+          msg_size+=1
+        end
+      end
+      self.save
+    end
+
+    def each_on(color_code)
+      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
+      t.each do |i|
+        unless i == "pixels"
+          self.send(i+"=",color_code)
+          self.save
+        end
+      end
+    end
+
+    def all_off
+      self.all_on(0)
+    end
+
+    def each_off
+      self.each_on(0)
+    end
   
-    
+    def big_rainbow
+      leds = (0..239)
+      colors = {
+            0 => [148, 0, 211],
+            1 => [75, 0, 130],
+            2 => [0, 0, 255],
+            3 => [0, 255, 0],
+            4 => [255, 255, 0],
+            5 => [255, 127, 0],
+            6 => [255,0,0]
+            }
+            
+      stripe_width = leds.size/colors.size  
+      led_index = 0
+
+      colors.each_with_index {|(k,v), c|
+          until c < colors.size - 1 && led_index == (c + 1) * stripe_width || led_index == leds.size do
+            color = v[1] * 256**2 + v[0] * 256 + v[2]
+            self.send(to_target(led_index)+"=", color)
+            self.save
+            led_index+=1
+          end
+      }
+    end
+
+    def snake(length,color)
+      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
+      t.each_with_index do |v,i|
+        unless i == "pixels"
+          self.send(i+"=",color_code)
+          self.save
+        end
+      end
+    end
+
     def sync
       Apiotics.sync(self)
     end
     
     private
+
+    def to_target(i)
+      return "pixel_#{i.to_s}"
+    end
   
     def extract
       Apiotics::Extract.send(self)
