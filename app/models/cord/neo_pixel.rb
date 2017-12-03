@@ -558,9 +558,11 @@ module Cord
         end
       end
     end
+
     def all_off
       self.all_on(0)
     end
+    
     def christmas
       set_size(240)
       5.times do 
@@ -571,7 +573,7 @@ module Cord
     end
   
     def big_rainbow
-      @size = self.pixels
+      set_size(240)
       colors = {
             0 => [148, 0, 211],
             1 => [75, 0, 130],
