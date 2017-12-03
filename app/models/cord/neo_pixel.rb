@@ -598,12 +598,20 @@ module Cord
       }
     end
 
-    def snake(length,color)
+    def snake(length,color_code)
+      set_size(240)
       t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
-      t.each_with_index do |v,i|
+      t.each do |v,i|
         unless i == "pixels"
-          self.send(i+"=",color_code)
-          self.save
+          (0..length).each do |j|
+            self.send(to_target(j)+"=", color_code)
+            self.save
+          end
+          (length..238).each do |k|
+            self.send(to_target(k+1)+"=", color_code)
+            self.send(to_target(k-length)+"=", 0  )
+            self.save
+          end
         end
       end
     end
