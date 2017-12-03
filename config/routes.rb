@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   scope module: :cord do 
-		resources :cords
+		resources :cords do 
+			get 'commands', on: :member
+			post 'rainbow', on: :member
+			post 'snake', on: :member
+		end
 	end
   devise_for :users
   scope module: :node do 

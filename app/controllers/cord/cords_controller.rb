@@ -1,6 +1,6 @@
 module Cord
   class CordsController < ApplicationController
-    before_action :set_cord, only: [:show, :edit, :update, :destroy]
+    before_action :set_cord, only: [:show, :edit, :update, :destroy, :commands, :rainbow, :snake]
 
     # GET /alert/leds
     def index
@@ -44,6 +44,16 @@ module Cord
     def destroy
       @cord.destroy
       redirect_to cords_url, notice: 'cord was successfully destroyed.'
+    end
+
+    def commands
+    end
+
+    def rainbow
+      @cord.neo_pixel.big_rainbow
+    end
+
+    def snake
     end
 
     private
