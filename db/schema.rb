@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20171128212818) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "apiotics_settings", id: :bigint, default: nil, force: :cascade do |t|
+    create_table "apiotics_settings", id: :serial, force: :cascade do |t|
     t.text "key"
     t.text "value"
     t.datetime "created_at"
