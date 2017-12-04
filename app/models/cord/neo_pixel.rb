@@ -528,15 +528,7 @@ module Cord
       #{}"pixel" = "pixel"
       #{}"pixels" = "pixels"
 
-      @rainbow_colors = {
-        0 => [148, 0, 211],
-        1 => [75, 0, 130],
-        2 => [0, 0, 255],
-        3 => [0, 255, 0],
-        4 => [255, 255, 0],
-        5 => [255, 127, 0],
-        6 => [255,0,0]
-        }
+
       super
     end
 
@@ -582,10 +574,11 @@ module Cord
     
     def christmas
       set_size(240)
-      5.times do 
+      10.times do
         self.all_on(16711680)
-        sleep (1.0)
+        #sleep (1.0)
         self.all_on(65280)
+        #sleep (1.0)
       end 
     end
   
@@ -595,12 +588,22 @@ module Cord
       stripe_width = 34
       led_index = 0
 
+      @rainbow_colors = {
+        0 => [148, 0, 211],
+        1 => [75, 0, 130],
+        2 => [0, 0, 255],
+        3 => [0, 255, 0],
+        4 => [255, 255, 0],
+        5 => [255, 127, 0],
+        6 => [255,0,0]
+        }
+
       @rainbow_colors.each_with_index {|(k,v), c|
           until c < @rainbow_colors.size - 1 && led_index == (c + 1) * stripe_width || led_index == @size do
-            color = v[1] * 256**2 + v[0] * 256 + v[2]
+            color = v[0] * 256**2 + v[1] * 256 + v[2]
             self.send(to_target(led_index)+"=", color)
             self.save
-            sleep(0.03)
+            #sleep(0.01)
             led_index+=1
           end
       }
@@ -624,31 +627,33 @@ module Cord
       centers = Array.new
       centers[0] = space_between/2
       (1..3).each do |i|
-        centers[1] = space_between/2 + space_between*i
+        centers[i] = space_between/2 + space_between*i
       end
 
-      centers.each |i| do 
+      centers.each do |i|
         self.send(to_target(i)+"=", color_code)
       end
       self.save
+      sleep(0.3)
 
       (1..space_between/2).each do |i|
         if i == 1 
-          centers.each |j| do 
+          centers.each do |j|
             self.send(to_target(j)+"=", 0)
           end
         else
-          centers.each |j| do 
+          centers.each do |j|
             self.send(to_target(j-i)+"=", 0)
             self.send(to_target(j+i)+"=", 0)           
           end
         end
 
-        center.each |k| do 
+        centers.each do |k|
             self.send(to_target(k-i-1)+"=", color_code)
             self.send(to_target(k+i+1)+"=", color_code) 
         end
         self.save
+        sleep(0.3)
       end
     end
  
@@ -658,17 +663,18 @@ module Cord
         (0..length-1).each do |i|
           self.send(to_target(i)+"=", color_code)
           self.save
-          sleep(0.3)
+          sleep(0.01)
         end
         (length..239).each do |j|
           self.send(to_target(j)+"=", color_code)
           self.send(to_target(j-length)+"=", 0  )
           self.save
-          sleep(0.3)
+          sleep(0.01)
         end
       end
     end
-
+  
+    
     def sync
       Apiotics.sync(self)
     end
