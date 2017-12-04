@@ -605,6 +605,52 @@ module Cord
           end
       }
     end
+
+    def custom_pattern(pattern)
+      set_size(240)
+      if pattern.length > 0 
+        (0..239).each do |i|
+          self.send(to_target(i)+"=", pattern[i%pattern.length])
+          self.save
+          sleep(0.3)
+        end
+      end
+    end
+
+    def fireworks(num, color_code)
+      set_size(240)
+      # num is the number of equidistant points along the strip that fireworks will "shoot out" from
+      space_between = 240/num
+      centers = Array.new
+      centers[0] = space_between/2
+      (1..3).each do |i|
+        centers[1] = space_between/2 + space_between*i
+      end
+
+      centers.each |i| do 
+        self.send(to_target(i)+"=", color_code)
+      end
+      self.save
+
+      (1..space_between/2).each do |i|
+        if i == 1 
+          centers.each |j| do 
+            self.send(to_target(j)+"=", 0)
+          end
+        else
+          centers.each |j| do 
+            self.send(to_target(j-i)+"=", 0)
+            self.send(to_target(j+i)+"=", 0)           
+          end
+        end
+
+        center.each |k| do 
+            self.send(to_target(k-i-1)+"=", color_code)
+            self.send(to_target(k+i+1)+"=", color_code) 
+        end
+        self.save
+      end
+    end
  
     def snake(length,color_code)
       set_size(240)
@@ -612,13 +658,13 @@ module Cord
         (0..length-1).each do |i|
           self.send(to_target(i)+"=", color_code)
           self.save
-          sleep(1.0)
+          sleep(0.3)
         end
         (length..239).each do |j|
           self.send(to_target(j)+"=", color_code)
           self.send(to_target(j-length)+"=", 0  )
           self.save
-          sleep(1.0)
+          sleep(0.3)
         end
       end
     end
