@@ -54,6 +54,9 @@ module Cord
     end
 
     def snake
+      length = ::Cord::Cord.find(params[:snake_length])
+      color = ::Cord::Cord.find(params[:snake_color])
+      @cord.neo_pixel.snake(length, color)
     end
 
     private

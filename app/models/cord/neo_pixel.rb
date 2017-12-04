@@ -523,10 +523,10 @@ module Cord
     message: "%{value} is not within the range 1..256" }
 
     def initialize
-      @size = 240
+      # @size = 240
       @buffer = 40
-      @interface_prefix = "pixel"
-      @size_interface = "pixels"
+      #{}"pixel" = "pixel"
+      #{}"pixels" = "pixels"
 
       @rainbow_colors = {
         0 => [148, 0, 211],
@@ -537,13 +537,14 @@ module Cord
         5 => [255, 127, 0],
         6 => [255,0,0]
         }
+      super
     end
 
     def set_size(size)
-      @size = size
-      self.send("#{@size_interface}=", size - 1)
+      #@size = size
+      self.send("pixels" + "=", size - 1)
       self.save
-      self.send("#{@size_interface}=", size)
+      self.send("pixels" + "=", size)
       self.save
     end
 
@@ -551,8 +552,8 @@ module Cord
       t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
       msg_size = 0
       t.each do |i|
-        unless i == @size_interface.to_s
-          if msg_size == @buffer
+        unless i == "pixels"
+          if msg_size == 40
             self.save
             sleep(0.01)
             msg_size = 0
@@ -567,7 +568,7 @@ module Cord
     def each_on(color_code)
       t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
       t.each do |i|
-        unless i == @size_interface.to_s
+        unless i == "pixels"
           self.send(i+"=",color_code)
           sleep(0.1)
           self.save
@@ -591,7 +592,7 @@ module Cord
     def big_rainbow
       set_size(240)
             
-      stripe_width = @size/(@rainbow_colors.size)
+      stripe_width = 34
       led_index = 0
 
       @rainbow_colors.each_with_index {|(k,v), c|
@@ -611,11 +612,13 @@ module Cord
         (0..length-1).each do |i|
           self.send(to_target(i)+"=", color_code)
           self.save
+          sleep(1.0)
         end
         (length..239).each do |j|
           self.send(to_target(j)+"=", color_code)
           self.send(to_target(j-length)+"=", 0  )
           self.save
+          sleep(1.0)
         end
       end
     end
@@ -627,7 +630,7 @@ module Cord
     private
 
     def to_target(i)
-      return "#{@interface_prefix}_#{i.to_s}"
+      return "pixel_#{i.to_s}"
     end
   
     def extract
