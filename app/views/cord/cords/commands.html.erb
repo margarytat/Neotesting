@@ -1,39 +1,41 @@
-<h2>Led commands</h2>
+<h2>Cord commands</h2>
 <div class='container'>
 	<select id="commands">
+		<option value="custom_pattern">Pattern</option>
 		<option value="rainbow_form">Rainbow</option>
-		<option value="bounce_form">Bounce</option>
 		<option value="snake_form">Snake</option>
 	</select>
-	<%= link_to 'Back', nodes_path %>
-	<div name="rainbow_form" id="rainbow_form" class="form-toggle" style="display:none">
-		<form role="form" >
-			<button type="button" class="btn cancel-button">Cancel</button>
-			<%= button_to "Rainbow", action: "rainbow" %>
+	<div name="pattern_form" id="pattern_form" class="form-toggle" style="display:none">
+		<form role="form">
 		</form>
 	</div>
-	<div name="bounce_form" id="bounce_form" class="form-toggle" style="display:none">
-		<form role="form">
-			<button type="button" class="btn cancel-button">Cancel</button> 
-			<%= button_to "Bounce", action: "bounce" %>
+	<div name="rainbow_form" id="rainbow_form" class="form-toggle" style="display:none">
+		<form role="form" >
+			<div class="input-group input-group-lg">
+				<span><label for="full_rainbow">Full rainbow</label></span>
+	      <span class="input-group-addon">
+	        <input type="checkbox" id="full_rainbow">
+	      </span>
+				<span><label for="rainbow_stripe_width">Stripe width</label></span>
+				<span><input type="number" id="rainbow_stripe_width" /></span>
+			</div>
+			<%= button_to "Start", action: "rainbow" %>
 		</form>
 	</div>
 	<div name="snake_form" id="snake_form" class="form-toggle" style="display:none">
 		<form role="form">
 			<div>
-			  <span><label for="length">Length</label></span>
-			  <span><input type="number" id="length" /></span>
+				<span><label for="snake_length">Length</label></span>
+				<span><input type="number" id="snake_length" /></span>
 			</div>
 			<div>
-			  <span><label for="snake_color" >Color</label></span>
-			  <span><input type="color" id="snake_color" />
+				<span><label for="snake_color" >Color</label></span>
+				<span><input type="color" id="snake_color" />
 			</div>
-			<div>
-			  <button type="button" class="btn cancel-button" >Cancel</button>
-			  <button type="submit" class="btn btn-primary">Start</button>
-			</div>
+			<%= button_to "Snake", action: "snake" %>
 		</form>
 	</div>
+	<%= link_to 'Back', cords_path %>
 </div>
 <script>
 	$(function(){

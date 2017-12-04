@@ -31,8 +31,8 @@
         </tr>
       <% end %> <!-- (0..239).each -->
       <tr>
-        <td>Commands</td>
-        <td><%= link_to "Edit", edit_cord_path(object)%>, <%= link_to "Show", cord_path(object) %></td>
+        <td>Actions</td>
+        <td><%= link_to "Edit", edit_cord_path(object)%>, <%= link_to "Show", cord_path(object) %>, <%= link_to "Commands", commands_cord_path(object) %> </td>
       </tr>
     <% end %> <!-- @cords.each -->
    </tbody>

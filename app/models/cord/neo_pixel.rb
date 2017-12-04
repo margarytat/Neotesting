@@ -522,23 +522,39 @@ module Cord
     validates :pixels, inclusion: { in: 1..256,
     message: "%{value} is not within the range 1..256" }
 
+    def initialize
+      @size = 240
+      @buffer = 40
+      @interface_prefix = "pixel"
+      @size_interface = "pixels"
+
+      @rainbow_colors = {
+        0 => [148, 0, 211],
+        1 => [75, 0, 130],
+        2 => [0, 0, 255],
+        3 => [0, 255, 0],
+        4 => [255, 255, 0],
+        5 => [255, 127, 0],
+        6 => [255,0,0]
+        }
+    end
+
     def set_size(size)
       @size = size
-      self.send("pixels=", size - 1)
+      self.send("#{@size_interface}=", size - 1)
       self.save
-      self.send("pixels=", size)
+      self.send("#{@size_interface}=", size)
       self.save
     end
 
     def all_on(color_code)
-      @buffer = 40
       t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
       msg_size = 0
       t.each do |i|
-        unless i == "pixels"
+        unless i == @size_interface.to_s
           if msg_size == @buffer
             self.save
-            #sleep(1.0)
+            sleep(0.01)
             msg_size = 0
           end
           self.send(i+"=",color_code)
@@ -551,7 +567,7 @@ module Cord
     def each_on(color_code)
       t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
       t.each do |i|
-        unless i == "pixels"
+        unless i == @size_interface.to_s
           self.send(i+"=",color_code)
           sleep(0.1)
           self.save
@@ -574,21 +590,12 @@ module Cord
   
     def big_rainbow
       set_size(240)
-      colors = {
-            0 => [148, 0, 211],
-            1 => [75, 0, 130],
-            2 => [0, 0, 255],
-            3 => [0, 255, 0],
-            4 => [255, 255, 0],
-            5 => [255, 127, 0],
-            6 => [255,0,0]
-            }
             
-      stripe_width = @size/colors.size  
+      stripe_width = @size/(@rainbow_colors.size)
       led_index = 0
 
-      colors.each_with_index {|(k,v), c|
-          until c < colors.size - 1 && led_index == (c + 1) * stripe_width || led_index == @size do
+      @rainbow_colors.each_with_index {|(k,v), c|
+          until c < @rainbow_colors.size - 1 && led_index == (c + 1) * stripe_width || led_index == @size do
             color = v[1] * 256**2 + v[0] * 256 + v[2]
             self.send(to_target(led_index)+"=", color)
             self.save
@@ -597,21 +604,18 @@ module Cord
           end
       }
     end
-
+ 
     def snake(length,color_code)
       set_size(240)
-      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
-      t.each do |v,i|
-        unless i == "pixels"
-          (0..length).each do |j|
-            self.send(to_target(j)+"=", color_code)
-            self.save
-          end
-          (length..238).each do |k|
-            self.send(to_target(k+1)+"=", color_code)
-            self.send(to_target(k-length)+"=", 0  )
-            self.save
-          end
+      unless length > 237 
+        (0..length-1).each do |i|
+          self.send(to_target(i)+"=", color_code)
+          self.save
+        end
+        (length..239).each do |j|
+          self.send(to_target(j)+"=", color_code)
+          self.send(to_target(j-length)+"=", 0  )
+          self.save
         end
       end
     end
@@ -623,7 +627,7 @@ module Cord
     private
 
     def to_target(i)
-      return "pixel_#{i.to_s}"
+      return "#{@interface_prefix}_#{i.to_s}"
     end
   
     def extract
