@@ -3,8 +3,10 @@ Apiotics.configure do |config|
   config.private_key = "06338c1e7d913bd3648b55a47b42d50f738a71cd356d414f73e9d2d7bba6e225"
   config.local_port = 8001
   config.server_port = 8000
+  config.portal = "https://www.apiotics.com/"
   config.tls = true
   config.verify_peer = true
   config.handshake = true
   config.local_logging = false
+  config.reduced_metadata = true
 end
