@@ -609,9 +609,9 @@ module Cord
       end
     end
 
-    def moving_dots(space, color1, color2)
+    def moving_dots(reps, space, turn_off, color1, color2)
       set_size(240)
-        (0..10).each  do |s|
+        (0..reps).each  do |s|
 
           i = s%space
           while i < 240 do 
@@ -620,6 +620,9 @@ module Cord
           end
           self.save
           sleep(0.5)
+          if turn_off == true
+            self.all_off
+          end
 
           i = s%space + space/2
           while i < 240 do 
@@ -628,8 +631,10 @@ module Cord
           end
           self.save
           sleep(0.5)
-
-      end # end 10.times
+          if turn_off == true
+            self.all_off
+          end
+      end # end reps.each
     end
 
     def fireworks(num, color_code)
