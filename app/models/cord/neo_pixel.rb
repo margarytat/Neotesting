@@ -650,66 +650,51 @@ module Cord
           self.save
         end
       end
+      sleep(2.0)
       all_off
-      3.times do
+      5.times do
         self.all_on(16711680)
         sleep (1.0)
         self.all_on(65280)
         sleep (1.0)
       end
-      moving_dots(15, 4, true, 255, 65280)
+      moving_dots(4, 3, false, 255, 16711680)
       sleep(2.0)
+      moving_dots(4, 3, false, 33280, 16711892)
       all_off
       sleep(2.0)
       snake(3, 8, 14848427)
       sleep(2.0)
-
+      middle_pulse(5, 130)
+      sleep(2.0)
+      patterned_snake(2, [16711680, 16739328, 16773632, 65280, 65454, 255, 65379, 4275555, 10435939, 10456675, 10474339])
     end 
 
-    def fireworks(num, color_code)
+    def patterned_snake(reps, pattern)
       set_size(240)
-      # num is the number of equidistant points along the strip that fireworks will "shoot out" from
-      space_between = (240/num)
-      centers = Array.new
-      centers[0] = space_between/2
-      if (num > 1)
-        (1..num-1).each do |i|
-          centers[i] = (space_between/2) + space_between*i
-        end
-      end
-
-      centers.each do |i|
-        self.send(to_target(i)+"=", color_code)
-      end
-      self.save
-      sleep(0.3)
-
-      (1..space_between/2).each do |i|
-        if i == 1 
-          centers.each do |j|
-            self.send(to_target(j)+"=", 0)
-          end
-        else
-          centers.each do |j|
-            self.send(to_target(j-i)+"=", 0)
-            self.send(to_target(j+i)+"=", 0)           
-          end
+      l = pattern.length
+      unless l > 237 
+        (0..l-1).each do |i|
+          self.send(to_target(i)+"=", pattern[i%l])
+          self.save
+          sleep(0.01)
         end
 
-        centers.each do |k|
-          if (k-i-1) >=0
-            self.send(to_target(k-i-1)+"=", color_code)
+        h = l
+        (reps*240-l).times do 
+          (0..l-1).each do |p|
+            self.send(to_target((h-p)%240)+"=", pattern[p%l])
           end
-          if (k+i+1) <@size
-            self.send(to_target(k+i+1)+"=", color_code)
-          end
+          self.send(to_target((h-l)%240)+"=", 0  )
+          h += 1
+          self.save
+          sleep(0.01)
         end
-        self.save
-        sleep(0.3)
       end
+      all_off
     end
  
-    def snake(reps, length,color_code)
+    def snake(reps, length, color_code)
       set_size(240)
       unless length > 237 
         (0..length-1).each do |i|
@@ -717,16 +702,83 @@ module Cord
           self.save
           sleep(0.01)
         end
-        k = length
+        h = length
         (reps*240-length).times do 
-          self.send(to_target(k%240)+"=", color_code)
-          self.send(to_target((k-length)%240)+"=", 0  )
-          k += 1
+          self.send(to_target(h%240)+"=", color_code)
+          self.send(to_target((h-length)%240)+"=", 0)
+          h += 1
           self.save
           sleep(0.01)
         end
       end
       all_off
+    end
+
+    def middle_pulse(reps, color)
+      set_size(240)
+      reps.times do 
+        l = 119
+        r = 120
+        while (l >= 0 && r <= 239) do 
+          self.send(to_target(l)+"=", color)
+          self.send(to_target(r)+"=", color)
+          self.save
+          sleep(0.01)
+          l -= 1
+          r += 1
+        end
+        l = 0
+        r = 239
+        while (l <= 119 && r >= 120) do 
+          self.send(to_target(l)+"=", 0)
+          self.send(to_target(r)+"=", 0)
+          self.save
+          sleep(0.01)
+          l += 1 
+          r -= 1
+        end
+      end # reps.times
+    end
+
+    def game_of_life(reps, color, initial_cells)
+      set_size(240)
+      all_off
+      cells = Array.new(240,0)
+      (0..initial_cells.length-1).each do |i|
+        self.send(to_target(initial_cells[i])+"=", color)
+        cells[i] = 1
+      end
+      self.save
+      sleep(2.0)
+
+      reps.times do 
+        new_cells = Array.new(240, 0)
+        if cells[1] == 1
+          new_cells[0] = 1
+          self.send(to_target(0)+"=",color)
+        else
+          self.send(to_target(0)+"=",0)
+        end
+
+        if cells[238] == 1
+          new_cells[239] = 1
+          self.send(to_target(239)+"=",color)
+        else
+          self.send(to_target(239)+"=",0)
+        end
+
+        (1..238).each do |i|
+          if cells[i-1] != cells[i+1]
+            new_cells[i] = 1
+            self.send(to_target(i)+"=",color)
+          else
+            self.send(to_target(i)+"=",0)
+          end
+        end
+        self.save
+        sleep(2.0)
+        cells = new_cells.dup
+      end
     end
   
     
