@@ -661,7 +661,9 @@ module Cord
       sleep(2.0)
       all_off
       sleep(2.0)
-      snake(10, 14848427)
+      snake(3, 8, 14848427)
+      sleep(2.0)
+
     end 
 
     def fireworks(num, color_code)
@@ -707,24 +709,7 @@ module Cord
       end
     end
  
-    def snake(length,color_code)
-      set_size(240)
-      unless length > 237
-        (0..length-1).each do |i|
-          self.send(to_target(i)+"=", color_code)
-          self.save
-          sleep(0.01)
-        end
-        (length..239).each do |j|
-          self.send(to_target(j)+"=", color_code)
-          self.send(to_target(j-length)+"=", 0  )
-          self.save
-          sleep(0.01)
-        end
-      end
-    end
-
-    def snake2(reps, length,color_code)
+    def snake(reps, length,color_code)
       set_size(240)
       unless length > 237 
         (0..length-1).each do |i|
@@ -733,7 +718,7 @@ module Cord
           sleep(0.01)
         end
         k = length
-        reps.times do |k| 
+        (reps*240-length).times do 
           self.send(to_target(k%240)+"=", color_code)
           self.send(to_target((k-length)%240)+"=", 0  )
           k += 1
