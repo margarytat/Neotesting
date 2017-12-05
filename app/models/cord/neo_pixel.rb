@@ -639,6 +639,7 @@ module Cord
 
     def lightshow
       set_size(240)
+      patterned_snake(2, [16711680, 16739328, 16773632, 65280, 65454, 255, 65379, 4275555, 10435939, 10456675, 10474339])
       all_on(3328)
       (0..240).each do |i|
         if i%3 == 0 
@@ -745,8 +746,9 @@ module Cord
       all_off
       cells = Array.new(240,0)
       (0..initial_cells.length-1).each do |i|
-        self.send(to_target(initial_cells[i])+"=", color)
-        cells[i] = 1
+        index = initial_cells[i]
+        self.send(to_target(index)+"=", color)
+        cells[index] = 1
       end
       self.save
       sleep(2.0)
