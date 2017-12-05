@@ -637,6 +637,33 @@ module Cord
       end # end reps.each
     end
 
+    def lightshow
+      set_size(240)
+      all_on(3328)
+      (0..240).each do |i|
+        if i%3 == 0 
+          self.send(to_target(i)+"=", 16770816)
+          self.save
+        elsif i%13 == 0
+          self.send(to_target(i)+"=", 16711680)
+          self.send(to_target(i+1)+"=", 16711680)
+          self.save
+        end
+      end
+      all_off
+      3.times do
+        self.all_on(16711680)
+        sleep (1.0)
+        self.all_on(65280)
+        sleep (1.0)
+      end
+      moving_dots(15, 4, true, 255, 65280)
+      sleep(2.0)
+      all_off
+      sleep(2.0)
+      snake(10, 14848427)
+    end 
+
     def fireworks(num, color_code)
       set_size(240)
       # num is the number of equidistant points along the strip that fireworks will "shoot out" from
@@ -682,7 +709,7 @@ module Cord
  
     def snake(length,color_code)
       set_size(240)
-      unless length > 237 
+      unless length > 237
         (0..length-1).each do |i|
           self.send(to_target(i)+"=", color_code)
           self.save
@@ -695,6 +722,26 @@ module Cord
           sleep(0.01)
         end
       end
+    end
+
+    def snake2(reps, length,color_code)
+      set_size(240)
+      unless length > 237 
+        (0..length-1).each do |i|
+          self.send(to_target(i)+"=", color_code)
+          self.save
+          sleep(0.01)
+        end
+        k = length
+        reps.times do |k| 
+          self.send(to_target(k%240)+"=", color_code)
+          self.send(to_target((k-length)%240)+"=", 0  )
+          k += 1
+          self.save
+          sleep(0.01)
+        end
+      end
+      all_off
     end
   
     
