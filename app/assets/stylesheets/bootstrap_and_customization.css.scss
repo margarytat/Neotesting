@@ -4,45 +4,10 @@
 
 $body-bg: 						#4a5f73;
 $navbar-default-bg: 			#263a4a;
-$navbar-default-link-color: 	#1bb394;
-$navbar-default-brand-color: 	#1bb394;
 $brand-primary: 				#1bb394;
-$jumbotron-bg:					#eee;
+$jumbotron-bg:					#F3F3F4;
 $jumbotron-padding: 			10px;
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-
-.navbar-default .navbar-brand {
-	text-align: center;
-    font-weight: bold;
-    font-family: 'Pacifico', cursive;
-    font-size: 28px;
-    letter-spacing: 1px;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: #263a4a;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #1bb394;
-}
-
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	color: #ffffcc;
-}
-
-.alert {
-	padding :	5px;
-}
-
-.node-row-cell {
-	border-top-color: 	000000;
-}
-
-body {
-	padding-top: 70px;
-	font-family: 'Roboto', sans-serif;
-}
 
