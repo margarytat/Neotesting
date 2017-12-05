@@ -60,6 +60,14 @@ label {
 	cursor: pointer;
 }
 
+td a {
+	color: #1BB394;
+}
+
+td a:hover {
+	color: #19A387;
+}
+
 /* ---- MIXED ---- */
 
 img.hamburg {
@@ -93,14 +101,6 @@ h1, .h1 {
 
 h2, .h2 {
 	margin: 0;
-}
-
-td a {
-	color: #1BB394;
-}
-
-td a:hover {
-	color: #19A387;
 }
 
 	/* ---- Login ---- */
@@ -231,7 +231,7 @@ td a:hover {
 
 /* --- default Boostrap break point --- */
 @media (min-width: 768px) {
-	/* fix ToL title on Login page */
+	/* fix ToL title on Login page - change menu checked state?*/
 	img.hamburg {
 		display: none;
 	}
