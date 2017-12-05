@@ -533,7 +533,7 @@ module Cord
     end
 
     def set_size(size)
-      #@size = size
+      @size = size
       self.send("pixels" + "=", size - 1)
       self.save
       self.send("pixels" + "=", size)
@@ -555,17 +555,6 @@ module Cord
         end
       end
       self.save
-    end
-
-    def each_on(color_code)
-      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
-      t.each do |i|
-        unless i == "pixels"
-          self.send(i+"=",color_code)
-          sleep(0.1)
-          self.save
-        end
-      end
     end
 
     def all_off
@@ -620,14 +609,39 @@ module Cord
       end
     end
 
+    def moving_dots(space, color1, color2)
+      set_size(240)
+        (0..10).each  do |s|
+
+          i = s%space
+          while i < 240 do 
+            self.send(to_target(i)+"=", color1)
+            i += space
+          end
+          self.save
+          sleep(0.5)
+
+          i = s%space + space/2
+          while i < 240 do 
+            self.send(to_target(i)+"=", color2)
+            i += space
+          end
+          self.save
+          sleep(0.5)
+
+      end # end 10.times
+    end
+
     def fireworks(num, color_code)
       set_size(240)
       # num is the number of equidistant points along the strip that fireworks will "shoot out" from
-      space_between = 240/num
+      space_between = (240/num)
       centers = Array.new
       centers[0] = space_between/2
-      (1..3).each do |i|
-        centers[i] = space_between/2 + space_between*i
+      if (num > 1)
+        (1..num-1).each do |i|
+          centers[i] = (space_between/2) + space_between*i
+        end
       end
 
       centers.each do |i|
@@ -649,8 +663,12 @@ module Cord
         end
 
         centers.each do |k|
+          if (k-i-1) >=0
             self.send(to_target(k-i-1)+"=", color_code)
-            self.send(to_target(k+i+1)+"=", color_code) 
+          end
+          if (k+i+1) <@size
+            self.send(to_target(k+i+1)+"=", color_code)
+          end
         end
         self.save
         sleep(0.3)
