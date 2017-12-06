@@ -64,6 +64,10 @@ td a {
 	color: #1BB394;
 }
 
+td a:visited {
+	color: #1BB394;
+}
+
 td a:hover {
 	color: #19A387;
 }
