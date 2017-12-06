@@ -522,14 +522,11 @@ module Cord
     validates :pixels, inclusion: { in: 1..256,
     message: "%{value} is not within the range 1..256" }
 
-    def initialize
-      # @size = 240
-      @buffer = 40
-      #{}"pixel" = "pixel"
-      #{}"pixels" = "pixels"
+    TREE_SIZE = 240
 
-
-      super
+    def set_up_tree
+      set_size(TREE_SIZE)
+      @interfaces = Apiotics.configuration.targets["Cord"]["NeoPixel"]
     end
 
     def set_size(size)
@@ -541,17 +538,10 @@ module Cord
     end
 
     def all_on(color_code)
-      t = Apiotics.configuration.targets["Cord"]["NeoPixel"]
-      msg_size = 0
-      t.each do |i|
-        unless i == "pixels"
-          if msg_size == 40
-            self.save
-            sleep(0.01)
-            msg_size = 0
-          end
-          self.send(i+"=",color_code)
-          msg_size+=1
+      set_up_tree
+      @interfaces.each_with_index do |v,i|
+        if i < @size
+          self.send(v+"=",color_code)
         end
       end
       self.save
@@ -561,22 +551,18 @@ module Cord
       self.all_on(0)
     end
     
-    def christmas
-      set_size(240)
-      10.times do
+    def christmas (reps)
+      set_up_tree
+      reps.times do
         self.all_on(16711680)
-        #sleep (1.0)
         self.all_on(65280)
-        #sleep (1.0)
       end 
     end
   
     def big_rainbow
-      set_size(240)
+      set_up_tree
             
       stripe_width = 34
-      led_index = 0
-
       @rainbow_colors = {
         0 => [148, 0, 211],
         1 => [75, 0, 130],
@@ -587,67 +573,67 @@ module Cord
         6 => [255,0,0]
         }
 
+      led_index = 0
       @rainbow_colors.each_with_index {|(k,v), c|
           until c < @rainbow_colors.size - 1 && led_index == (c + 1) * stripe_width || led_index == @size do
             color = v[0] * 256**2 + v[1] * 256 + v[2]
-            self.send(to_target(led_index)+"=", color)
+            self.send(@interfaces[led_index]+"=", color)
             self.save
-            #sleep(0.01)
             led_index+=1
           end
       }
     end
 
     def custom_pattern(pattern)
-      set_size(240)
+      set_up_tree
       if pattern.length > 0 
-        (0..239).each do |i|
-          self.send(to_target(i)+"=", pattern[i%pattern.length])
+        (0..@size-1).each do |i|
+          self.send(@interfaces[i]+"=", pattern[i%pattern.length])
           self.save
-          sleep(0.3)
+          sleep(0.1)
         end
       end
     end
 
     def moving_dots(reps, space, turn_off, color1, color2)
-      set_size(240)
-        (0..reps).each  do |s|
+      set_up_tree
+      (0..reps).each  do |s|
 
-          i = s%space
-          while i < 240 do 
-            self.send(to_target(i)+"=", color1)
-            i += space
-          end
-          self.save
-          sleep(0.5)
-          if turn_off == true
-            self.all_off
-          end
+        i = s%space
+        while i < @size do 
+          self.send(@interfaces[i]+"=", color1)
+          i += space
+        end
+        self.save
+        sleep(0.5)
+        if turn_off == true
+          self.all_off
+        end
 
-          i = s%space + space/2
-          while i < 240 do 
-            self.send(to_target(i)+"=", color2)
-            i += space
-          end
-          self.save
-          sleep(0.5)
-          if turn_off == true
-            self.all_off
-          end
+        i = s%space + space/2
+        while i < @size do 
+          self.send(@interfaces[i]+"=", color2)
+          i += space
+        end
+        self.save
+        sleep(0.5)
+        if turn_off == true
+          self.all_off
+        end
       end # end reps.each
     end
 
     def lightshow
-      set_size(240)
+      set_up_tree
       patterned_snake(2, [16711680, 16739328, 16773632, 65280, 65454, 255, 65379, 4275555, 10435939, 10456675, 10474339])
       all_on(3328)
-      (0..240).each do |i|
+      (0..@size-1).each do |i|
         if i%3 == 0 
-          self.send(to_target(i)+"=", 16770816)
+          self.send(@interfaces[i]+"=", 16770816)
           self.save
         elsif i%13 == 0
-          self.send(to_target(i)+"=", 16711680)
-          self.send(to_target(i+1)+"=", 16711680)
+          self.send(@interfaces[i]+"=", 16711680)
+          self.send(@interfaces[i+1]+"=", 16711680)
           self.save
         end
       end
@@ -672,41 +658,21 @@ module Cord
     end 
 
     def patterned_snake(reps, pattern)
-      set_size(240)
+      set_up_tree
       l = pattern.length
-      unless l > 237 
+      unless l > @size-3
         (0..l-1).each do |i|
-          self.send(to_target(i)+"=", pattern[i%l])
+          self.send(@interfaces[i]+"=", pattern[i%l])
           self.save
           sleep(0.01)
         end
 
         h = l
-        (reps*240-l).times do 
+        (reps*@size-l).times do 
           (0..l-1).each do |p|
-            self.send(to_target((h-p)%240)+"=", pattern[p%l])
+            self.send(@interfaces[(h-p)%(@size)]+"=", pattern[p%l]) #braces around @size to assist Sublime with formatting
           end
-          self.send(to_target((h-l)%240)+"=", 0  )
-          h += 1
-          self.save
-          sleep(0.01)
-        end
-      end
-      all_off
-    end
- 
-    def snake(reps, length, color_code)
-      set_size(240)
-      unless length > 237 
-        (0..length-1).each do |i|
-          self.send(to_target(i)+"=", color_code)
-          self.save
-          sleep(0.01)
-        end
-        h = length
-        (reps*240-length).times do 
-          self.send(to_target(h%240)+"=", color_code)
-          self.send(to_target((h-length)%240)+"=", 0)
+          self.send(@interfaces[(h-l)%(@size)]+"=", 0  )
           h += 1
           self.save
           sleep(0.01)
@@ -715,24 +681,29 @@ module Cord
       all_off
     end
 
+    def snake(reps, length, color_code)
+      pattern = Array.new(length, color_code)
+      patterned_snake(reps, pattern)
+    end
+
     def middle_pulse(reps, color)
-      set_size(240)
+      set_up_tree
       reps.times do 
-        l = 119
-        r = 120
-        while (l >= 0 && r <= 239) do 
-          self.send(to_target(l)+"=", color)
-          self.send(to_target(r)+"=", color)
+        l = @size/2 - 1
+        r = @size/2
+        while (l >= 0 && r <= @size - 1) do 
+          self.send(@interfaces[l]+"=", color)
+          self.send(@interfaces[r]+"=", color)
           self.save
           sleep(0.01)
           l -= 1
           r += 1
         end
         l = 0
-        r = 239
-        while (l <= 119 && r >= 120) do 
-          self.send(to_target(l)+"=", 0)
-          self.send(to_target(r)+"=", 0)
+        r = @size - 1
+        while (l <= @size/2 - 1 && r >= @size/2) do 
+          self.send(@interfaces[l]+"=", 0)
+          self.send(@interfaces[r]+"=", 0)
           self.save
           sleep(0.01)
           l += 1 
@@ -742,39 +713,39 @@ module Cord
     end
 
     def game_of_life(reps, color, initial_cells)
-      set_size(240)
+      set_up_tree
       all_off
-      cells = Array.new(240,0)
+      cells = Array.new(@size,0)
       (0..initial_cells.length-1).each do |i|
         index = initial_cells[i]
-        self.send(to_target(index)+"=", color)
+        self.send(@interfaces[index]+"=", color)
         cells[index] = 1
       end
       self.save
       sleep(2.0)
 
       reps.times do 
-        new_cells = Array.new(240, 0)
+        new_cells = Array.new(@size, 0)
         if cells[1] == 1
           new_cells[0] = 1
-          self.send(to_target(0)+"=",color)
+          self.send(@interfaces[0]+"=",color)
         else
-          self.send(to_target(0)+"=",0)
+          self.send(@interfaces[0]+"=",0)
         end
 
-        if cells[238] == 1
-          new_cells[239] = 1
-          self.send(to_target(239)+"=",color)
+        if cells[@size-2] == 1
+          new_cells[@size-1] = 1
+          self.send(@interfaces[@size-1]+"=",color)
         else
-          self.send(to_target(239)+"=",0)
+          self.send(@interfaces[@size-1]+"=",0)
         end
 
-        (1..238).each do |i|
+        (1..@size-2).each do |i|
           if cells[i-1] != cells[i+1]
             new_cells[i] = 1
-            self.send(to_target(i)+"=",color)
+            self.send(@interfaces[i]+"=",color)
           else
-            self.send(to_target(i)+"=",0)
+            self.send(@interfaces[i]+"=",0)
           end
         end
         self.save
@@ -789,10 +760,6 @@ module Cord
     end
     
     private
-
-    def to_target(i)
-      return "pixel_#{i.to_s}"
-    end
   
     def extract
       Apiotics::Extract.send(self)
