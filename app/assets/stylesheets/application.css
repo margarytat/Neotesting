@@ -212,7 +212,6 @@ h2, .h2 {
 /* ----------------------- */
 
 @media (min-width: 480px) {
-	/* change to fixed-nav? */
 
 	img.hamburg {
 		position: absolute;
@@ -231,7 +230,6 @@ h2, .h2 {
 
 /* --- default Boostrap break point --- */
 @media (min-width: 768px) {
-	/* fix ToL title on Login page - change menu checked state?*/
 	img.hamburg {
 		display: none;
 	}
@@ -270,7 +268,6 @@ h2, .h2 {
 		-o-transition: none;
 		}	
 
-
 	.navbar-default .navbar-brand {
 		margin-top: 0;
 	}
@@ -280,13 +277,5 @@ h2, .h2 {
 		#login-push.container-fluid {
 			margin-top: 0;
 		} 
-
-}
-
-@media (min-width: 992px) {
-	/* begin 2-column display of settings? */
-}
-
-@media (min-width: 1200px) {
 
 }

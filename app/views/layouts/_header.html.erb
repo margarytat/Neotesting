@@ -6,11 +6,9 @@
       <label for="menu-toggle" class="menu-label"><%= image_tag( "hamb-menu-icon.png", :class => "hamburg") %></label>
         <input type="checkbox" id="menu-toggle">
       <div class=navbar-header> 
-        <!-- try heading (still block lvl) or span (not block lvl) -->
         <h2 class=navbar-brand>Tree of Life</h2> 
       </div> <!-- end .navbar-header -->
       <ul class="nav navbar-nav"> 
-        <!-- add pages the pages for these links -->
         <li><%= link_to "Home", root_path %></li>
           <% if user_signed_in? %>
             <li><%= link_to "Account Settings", edit_user_registration_path %></li>
