@@ -39,16 +39,16 @@ p {
 
 a {
 	text-decoration: none;
-	color: #F3F3F4;
+	color: #1BB394;
 }
 
 a:visited {
 	text-decoration: none;
-	color: #F3F3F4;
+	color: #1BB394;
 }
 
 a:hover {
-	color: #1BB394;
+	color: #19A387;
 	text-decoration: none;
 }
 
@@ -58,18 +58,6 @@ input #menu-toggle{
 
 label {
 	cursor: pointer;
-}
-
-td a {
-	color: #1BB394;
-}
-
-td a:visited {
-	color: #1BB394;
-}
-
-td a:hover {
-	color: #19A387;
 }
 
 /* ---- MIXED ---- */
