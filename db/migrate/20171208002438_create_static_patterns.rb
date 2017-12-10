@@ -2,6 +2,7 @@ class CreateStaticPatterns < ActiveRecord::Migration[5.1]
   def change
     create_table :static_patterns do |t|
     	t.string :name
+      t.integer :size
     	t.integer :pixel_1
     	t.integer :pixel_2 
     	t.integer :pixel_3 
@@ -257,7 +258,6 @@ class CreateStaticPatterns < ActiveRecord::Migration[5.1]
     	t.integer :pixel_253 
     	t.integer :pixel_254 
     	t.integer :pixel_255 
-    	t.integer :pixels
 
     end
   end

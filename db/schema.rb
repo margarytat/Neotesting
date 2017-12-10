@@ -905,6 +905,7 @@ ActiveRecord::Schema.define(version: 20171208002545) do
 
   create_table "static_patterns", force: :cascade do |t|
     t.string "name"
+    t.integer "size"
     t.integer "pixel_1"
     t.integer "pixel_2"
     t.integer "pixel_3"
@@ -1160,7 +1161,6 @@ ActiveRecord::Schema.define(version: 20171208002545) do
     t.integer "pixel_253"
     t.integer "pixel_254"
     t.integer "pixel_255"
-    t.integer "pixels"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_static_patterns_on_user_id"
   end

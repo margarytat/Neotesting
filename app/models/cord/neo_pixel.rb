@@ -623,6 +623,11 @@ module Cord
       end # end reps.each
     end
 
+    def print_pixel_interface
+      results = (0..255).collect { |i| "pixel_" + i.to_s }.join(", :")
+      puts results
+    end
+
     def lightshow
       set_up_tree
       patterned_snake(2, [16711680, 16739328, 16773632, 65280, 65454, 255, 65379, 4275555, 10435939, 10456675, 10474339])

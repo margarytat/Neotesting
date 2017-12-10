@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
+  devise_for :users
   scope module: :cord do 
 		resources :cords do 
 			get 'commands', on: :member
-			post 'rainbow', on: :member
-			post 'snake', on: :member
 		end
 	end
-  devise_for :users
+
   scope module: :node do 
 		resources :nodes do 
 			get 'commands', on: :member
 			post 'rainbow', on: :member
 			post 'bounce', on: :member
 		end
+	end
+
+	resources :static_patterns do 
 	end
 
 	root 'cord/cords#index'

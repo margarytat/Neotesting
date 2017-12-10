@@ -1,6 +1,6 @@
 module Cord
   class CordsController < ApplicationController
-    before_action :set_cord, only: [:show, :edit, :update, :destroy, :commands, :rainbow, :snake]
+    before_action :set_cord, only: [:show, :edit, :update, :destroy, :commands]
 
     # GET /alert/leds
     def index
@@ -47,16 +47,6 @@ module Cord
     end
 
     def commands
-    end
-
-    def rainbow
-      @cord.neo_pixel.big_rainbow
-    end
-
-    def snake
-      length = ::Cord::Cord.find(params[:snake_length])
-      color = ::Cord::Cord.find(params[:snake_color])
-      @cord.neo_pixel.snake(length, color)
     end
 
     private
