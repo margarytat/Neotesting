@@ -1,0 +1,40 @@
+<%= simple_form_for @static_pattern do |f| %>
+<div class="table-responsive">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>
+	        Property
+	      </th>
+	      <th>
+	        Value
+	      </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+      <tr>
+        <td colspan=2><%= f.input :name %></td>
+      </tr>
+      <tr>
+        <td colspan=2><%= f.input :size %></td>
+      </tr>
+      <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+      <% (0..239).each do |i| %>
+        <tr> 
+          <td colspan=2>
+            <%= f.input :"pixel_#{i}" %>
+          </td>
+        </tr>
+      <% end %> <!-- (0..239).each -->
+	    <tr>
+	      <td>&nbsp;</td>
+	      <td>
+          <div class="actions">
+            <%= f.submit class: "btn btn-primary" %>
+          </div>
+        </td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+<% end %>
