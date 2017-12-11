@@ -906,6 +906,7 @@ ActiveRecord::Schema.define(version: 20171208002545) do
   create_table "static_patterns", force: :cascade do |t|
     t.string "name"
     t.integer "size"
+    t.integer "pixel_0"
     t.integer "pixel_1"
     t.integer "pixel_2"
     t.integer "pixel_3"
