@@ -33,7 +33,8 @@
       <tr>
         <td>Actions</td>
         <td>
-          <%= link_to "Edit", edit_cord_path(object)%>, <%= link_to "Show", cord_path(object) %>, <%= link_to "Commands", commands_cord_path(object) %>
+          <%= link_to "Edit", edit_cord_path(object)%>, <%= link_to "Show", cord_path(object) %>, 
+          <%= link_to "Commands", controller: "commands", cord_id: object.id %>
           <% if user_signed_in? %>
           , <%= link_to "Save as pattern", new_static_pattern_path(:source_cord_id => object.id) %> 
           <% end %>

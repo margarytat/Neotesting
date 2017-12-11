@@ -43,7 +43,7 @@ module Cord
     # DELETE /alert/leds/1
     def destroy
       @cord.destroy
-      redirect_to cords_url, notice: 'cord was successfully destroyed.'
+      redirect_to cords_url, notice: 'Cord was successfully destroyed.'
     end
 
     def commands

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+
   scope module: :cord do 
 		resources :cords do 
-			get 'commands', on: :member
 		end
 	end
 
