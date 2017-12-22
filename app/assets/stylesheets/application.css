@@ -28,7 +28,8 @@ Colors:
 */
 
 body {
-	padding-top: 70px;
+	padding-top: 50px;
+	margin-bottom: 60px;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -163,41 +164,51 @@ h2, .h2 {
 
 	/* ---- Login ---- */
 
-	.button-link {
-		font-family: 'Pacifico', cursive;
-	}
+.button-link {
+	font-family: 'Pacifico', cursive;
+}
 
-	.button-link:hover {
-		text-decoration: none;
-		color: #fff;
-	}
+.button-link:hover {
+	text-decoration: none;
+	color: #fff;
+}
 
-	.button-link:visited {
-		text-decoration: none;
-		color: #fff;
-	}
+.button-link:visited {
+	text-decoration: none;
+	color: #fff;
+}
 
-	.teal-button {
-		height: 35px;
-		width: 85px;
-		background-color: #1BB394;
-		color: #fff;
-		border-radius: 25px;
-		margin: 5px;
-	}
+.teal-button {
+	height: 35px;
+	width: 85px;
+	background-color: #1BB394;
+	color: #fff;
+	border-radius: 25px;
+	margin: 5px;
+}
 
-	.teal-button:active {
-		background-color: #19A387;
-	}
+.teal-button:active {
+	background-color: #19A387;
+}
 
-	.teal-button:hover {
-		color: #fff;
-	}
+.teal-button:hover {
+	color: #fff;
+}
 
-	.footer {
-		padding: 10px;
-		text-align: center;
-	} 
+.footer {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 10px;
+	text-align: center;
+	background-color: #263A4A;
+	color: #263A4A;
+} 
+
+.alert {
+	margin-top: 10px;
+}
 
 /* ----------------------- */
 /* ---- MEDIA QUERIES ---- */
