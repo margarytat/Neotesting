@@ -96,30 +96,30 @@ h2, .h2 {
 	margin: 0;
 }
 
-	/* ---- Login ---- */
+/* ---- Login ---- */
 
-	#login .navbar-fixed-top {
-		background-color: #1BB394;
-	}
+#login .navbar-fixed-top {
+	background-color: #1BB394;
+}
 
-	#login .navbar-default .navbar-brand {
-		background-color: #1BB394;
-	}
+#login .navbar-default .navbar-brand {
+	background-color: #1BB394;
+}
 
-	#login-push.container-fluid {
-		margin-top: 20px;
-		background-color: #1BB394;
-	} 
+#login-push.container-fluid {
+	margin-top: 20px;
+	background-color: #1BB394;
+} 
 
-	#login h2 {
-		color: #F3F3F4;
-	}
+#login h2 {
+	color: #F3F3F4;
+}
 
 /* ---- IDs ----*/
 
 
 
-/* ---- Classes ---- */
+/* ---- Navbar ---- */
 
 #menu-toggle:checked ~ .navbar-nav { position: absolute; left: 0; }
 
@@ -162,7 +162,7 @@ h2, .h2 {
 }
 
 
-	/* ---- Login ---- */
+/* ---- Buttons, footer, collapsing rows ---- */
 
 .button-link {
 	font-family: 'Pacifico', cursive;
@@ -208,6 +208,16 @@ h2, .h2 {
 
 .alert {
 	margin-top: 10px;
+}
+
+tr.collapse.in {
+  display: table-row;
+}
+
+tr.collapsing {
+    -webkit-transition: none;
+    transition: none;
+    display: none;
 }
 
 /* ----------------------- */

@@ -8,6 +8,10 @@ th, td {
     text-align: center;
 }
 
+td.collapse_trigger {
+	text-align: left;
+}
+
 th {
     background-color: #f5f5f5;
     color: black;
