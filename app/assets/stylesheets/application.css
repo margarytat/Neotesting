@@ -162,7 +162,7 @@ h2, .h2 {
 }
 
 
-/* ---- Buttons, footer, collapsing rows ---- */
+/* ---- MISC (buttons, footer, notice, title, commands ---- */
 
 .button-link {
 	font-family: 'Pacifico', cursive;
@@ -210,15 +210,23 @@ h2, .h2 {
 	margin-top: 10px;
 }
 
-tr.collapse.in {
-  display: table-row;
+.section-title {
+	margin-bottom: 20px;
 }
 
-tr.collapsing {
-    -webkit-transition: none;
-    transition: none;
-    display: none;
-}
+.command_label {
+ 	margin-top: 10px;
+ 	margin-bottom: 10px;
+ }
+
+ .command-form-params {
+  margin-top: 30px;
+ 	margin-bottom: 10px;
+ }
+
+ .command-execute {
+ 	margin-top: 40px;
+ }
 
 /* ----------------------- */
 /* ---- MEDIA QUERIES ---- */
