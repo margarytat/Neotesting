@@ -28,7 +28,8 @@ Colors:
 */
 
 body {
-	padding-top: 70px;
+	padding-top: 50px;
+	margin-bottom: 60px;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -95,30 +96,30 @@ h2, .h2 {
 	margin: 0;
 }
 
-	/* ---- Login ---- */
+/* ---- Login ---- */
 
-	#login .navbar-fixed-top {
-		background-color: #1BB394;
-	}
+#login .navbar-fixed-top {
+	background-color: #1BB394;
+}
 
-	#login .navbar-default .navbar-brand {
-		background-color: #1BB394;
-	}
+#login .navbar-default .navbar-brand {
+	background-color: #1BB394;
+}
 
-	#login-push.container-fluid {
-		margin-top: 20px;
-		background-color: #1BB394;
-	} 
+#login-push.container-fluid {
+	margin-top: 20px;
+	background-color: #1BB394;
+} 
 
-	#login h2 {
-		color: #F3F3F4;
-	}
+#login h2 {
+	color: #F3F3F4;
+}
 
 /* ---- IDs ----*/
 
 
 
-/* ---- Classes ---- */
+/* ---- Navbar ---- */
 
 #menu-toggle:checked ~ .navbar-nav { position: absolute; left: 0; }
 
@@ -161,43 +162,71 @@ h2, .h2 {
 }
 
 
-	/* ---- Login ---- */
+/* ---- MISC (buttons, footer, notice, title, commands ---- */
 
-	.button-link {
-		font-family: 'Pacifico', cursive;
-	}
+.button-link {
+	font-family: 'Pacifico', cursive;
+}
 
-	.button-link:hover {
-		text-decoration: none;
-		color: #fff;
-	}
+.button-link:hover {
+	text-decoration: none;
+	color: #fff;
+}
 
-	.button-link:visited {
-		text-decoration: none;
-		color: #fff;
-	}
+.button-link:visited {
+	text-decoration: none;
+	color: #fff;
+}
 
-	.teal-button {
-		height: 35px;
-		width: 85px;
-		background-color: #1BB394;
-		color: #fff;
-		border-radius: 25px;
-		margin: 5px;
-	}
+.teal-button {
+	height: 35px;
+	width: 85px;
+	background-color: #1BB394;
+	color: #fff;
+	border-radius: 25px;
+	margin: 5px;
+}
 
-	.teal-button:active {
-		background-color: #19A387;
-	}
+.teal-button:active {
+	background-color: #19A387;
+}
 
-	.teal-button:hover {
-		color: #fff;
-	}
+.teal-button:hover {
+	color: #fff;
+}
 
-	.footer {
-		padding: 10px;
-		text-align: center;
-	} 
+.footer {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 10px;
+	text-align: center;
+	background-color: #263A4A;
+	color: #263A4A;
+} 
+
+.alert {
+	margin-top: 10px;
+}
+
+.section-title {
+	margin-bottom: 20px;
+}
+
+.command_label {
+ 	margin-top: 10px;
+ 	margin-bottom: 10px;
+ }
+
+ .command-form-params {
+  margin-top: 30px;
+ 	margin-bottom: 10px;
+ }
+
+ .command-execute {
+ 	margin-top: 40px;
+ }
 
 /* ----------------------- */
 /* ---- MEDIA QUERIES ---- */

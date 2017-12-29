@@ -1,4 +1,4 @@
-table {
+table, th {
     border-collapse: collapse;
     border: 1px solid black;
 }
@@ -13,6 +13,24 @@ th {
     color: black;
 }
 
+td {
+	border-right: 1px solid black;
+}
+
 tr:nth-child(even) {
   background-color: #f2f2f2
+}
+
+td.collapse_trigger {
+	text-align: left;
+}
+
+tr.collapse.in {
+  display: table-row;
+}
+
+tr.collapsing {
+    -webkit-transition: none;
+    transition: none;
+    display: none;
 }

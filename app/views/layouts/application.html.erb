@@ -13,16 +13,17 @@
 
   <body>
     <%= render 'layouts/header' %>
-      <div class="jumbotron">
-        <%= render('layouts/messages') %>
-        <!-- yields to page being accessed -->
-        <%= yield %>
-      </div>
+    <div class="container">
+      <%= render('layouts/messages') %>
+      <!-- yields to page being accessed -->
+      <%= yield %>
+    </div>
 
-      <div class="footer">
-        <p>Powered by: <a href="https://www.apiotics.com/">Apiotics</a></p>
-        <p>App developed by: Andy, Margaryta, Nick, Rook, Arrachael</p>
+    <div class="footer">
+      <div class="container">
+        <p style="color:#F3F3F4">Powered by: <span style="font-size: 14px"><a href="https://www.apiotics.com/">Apiotics</a></span></p>
       </div>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- JavaScript of Bootstrap -->

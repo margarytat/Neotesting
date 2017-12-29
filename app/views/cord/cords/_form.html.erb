@@ -1,41 +1,46 @@
-<%= simple_form_for(@cord, url: cord_path(@cord)) do |form| %>
-<table>
-  <thead>
-    <tr>
-      <th style="border: 1px solid black;">
-        Property
-      </th>
-      <th style="border: 1px solid black;">
-        Value
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td> Id </td>
-      <td><%= @cord.apiotics_instance %></td>
-    </tr>
-    <tr>
-      <td> Name </td>
-      <td><%= @cord.name %></td>
-    </tr>
-
-    <%= form.simple_fields_for :neo_pixel do |fields| %>
-      <% (0..239).each do |i| %>
-        <tr> 
-          <td colspan=2>
-            <%= fields.input :"pixel_#{i}" %>
-          </td>
-        </tr>
-      <% end %> <!-- (0..239).each -->
+<%= simple_form_for(@cord, url: cord_path(@cord)) do |f| %>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
       <tr>
-        <td colspan=2><%= fields.input :pixels %></td>
+        <th>
+          Property
+        </th>
+        <th>
+          Value
+        </th>
       </tr>
-    <% end %> <!-- form -->
-    <tr>
-      <td>&nbsp;</td>
-      <td><div class="actions"><%= form.submit %></div></td>
-    </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <tr>
+        <td> Id </td>
+        <td><%= @cord.apiotics_instance %></td>
+      </tr>
+      <tr>
+        <td> Name </td>
+        <td><%= @cord.name %></td>
+      </tr>
+      <%= f.simple_fields_for :neo_pixel do |n| %>
+        <tr>
+          <td>Size</td>
+          <td><%= n.input_field :pixels %></td>
+        </tr>
+        <% (0..239).each do |i| %>
+          <tr> 
+            <td>
+              <%= "pixel_#{i}" %>
+            </td>
+            <td >
+              <%= n.input_field :"pixel_#{i}" %>
+            </td>
+          </tr>
+        <% end %> <!-- (0..239).each -->
+      <% end %> <!-- simple_fields_for -->
+      <tr>
+        <td><div class="actions"><%= f.submit %></div></td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <% end %>
