@@ -30,7 +30,7 @@ class CommandsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def command_params
-      params.fetch(:command, {})
+      params.fetch(:command, {}).permit(:led_color, :stripe_width, :num_reps, :snake_length, :snake_color)
     end
 
 end

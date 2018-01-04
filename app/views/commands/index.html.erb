@@ -9,18 +9,10 @@
   </div>
   <div class="col-sm-2">
     <select id="commands">
-    <option value="on_params">All On</option>
-    <option value="off_params">All Off</option>
-    <option value="pattern_params">Pattern</option>
-    <option value="rainbow_params">Rainbow</option>
-    <option value="snake_params">Snake</option>
-    <option value="patterned_snake_params">Patterned Snake</option>
-    <option value="christmas_params">Christmas</option>
-    <option value="dots_params">Moving Dots</option>
-    <option value="lightshow_params">Lightshow</option>
-    <option value="middle_pulse_params">Middle Pulse</option>
-    <option value="game_of_life_params">Game Of Life</option>
-  </select>
+    <% get_commands.each do |c| %>
+      <%= select_option_for(c) %>
+    <% end %>
+    </select>
   </div>
 </div>
 <div class="row command_label">
@@ -33,7 +25,10 @@
 </div>
 
 <%= form_tag(commands_path, html: {id: "commands-form", class: "form-horizontal"} ) do %>
-  <div name="on_params" id="on_params" class="command-form-params" style="display:none">
+
+<!-- loop through all commands and generate divs for each
+ -->
+  <div name="all_on_params" id="all_on_params" class="command-form-params" style="display:none">
     <%= hidden_field_tag(:command, "all_on") %>
     <div class="row command_label">
       <div class="col-sm-1">
@@ -44,7 +39,7 @@
       </div>
     </div>
   </div>
-  <div name="off_params" id="off_params" class="command-form-params" style="display:none">
+  <div name="all_off_params" id="all_off_params" class="command-form-params" style="display:none">
     <%= hidden_field_tag(:command, "all_off") %>
   </div>
   <div name="pattern_params" id="pattern_params" class="command-form-params" style="display:none">
