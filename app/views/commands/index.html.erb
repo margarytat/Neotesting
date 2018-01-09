@@ -3,35 +3,30 @@
   <h1>Cord Commands</h1>
 </div>
 
-<div class="row command_label">
-  <div class="col-sm-1">
-    <%= label_tag 'Command:' %>
-  </div>
-  <div class="col-sm-2">
-    <select id="commands">
-    <% get_commands.each do |c| %>
-      <%= select_option_for(c) %>
-    <% end %>
-    </select>
-  </div>
-</div>
-<div class="row command_label">
-  <div class="col-sm-1">
-    <%= label_tag 'Cord:' %>
-  </div>
-  <div class="col-sm-2">
-    <%= collection_select :cord, :apiotics_instance, @cords, :apiotics_instance, :name, include_blank: false %>
-  </div>
-</div>
+<%= form_with(url: new_command_path, html: {id: "commands-form", class: "form-horizontal"} ) do |f| %>
 
-<%= form_tag(commands_path, html: {id: "commands-form", class: "form-horizontal"} ) do %>
+  <div class="row command_label">
+    <div class="col-sm-1">
+      <%= label_tag 'Command:' %>
+    </div>
+    <div class="col-sm-2">
+      <%= select_tag 'selected_command', options_for_select(get_commands.collect{ |c| [ c.titleize, c ] }) %>
+    </div>
+  </div>
+  <div class="row command_label">
+    <div class="col-sm-1">
+      <%= label_tag 'Cord:' %>
+    </div>
+    <div class="col-sm-2">
+      <%= collection_select :cord, :id, @cords, :id, :name, include_blank: false %>
+    </div>
+  </div>
 
-<!-- loop through all commands and generate divs for each
+<!-- TODO: loop through all commands and generate divs for each via helper
  -->
-  <div name="all_on_params" id="all_on_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "all_on") %>
+  <div name="all_on" id="all_on" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-sm-1">
+      <div class="col-sm-2">
         <%= label_tag 'Color:' %>
       </div>
       <div class="col-sm-1">
@@ -39,14 +34,12 @@
       </div>
     </div>
   </div>
-  <div name="all_off_params" id="all_off_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "all_off") %>
+
+  <div name="all_off" id="all_off" class="command-form-params" style="display:none">
   </div>
-  <div name="pattern_params" id="pattern_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "pattern") %>
+  <div name="pattern" id="pattern" class="command-form-params" style="display:none">
   </div>
-  <div name="rainbow_params" id="rainbow_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "rainbow") %>
+  <div name="rainbow" id="rainbow" class="command-form-params" style="display:none">
     <div class="row command_label">
       <div class="col-sm-2">
         <%= label_tag 'Stripe width:' %>
@@ -56,115 +49,113 @@
       </div>
     </div>
   </div>
-  <div name="snake_params" id="snake_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "snake") %>
+  <div name="snake" id="snake" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= label_tag 'Number of loops:' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <%= number_field_tag 'num_reps', nil, in: 1...100 %>
       </div>
     </div>
     <div class="row command_label">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= label_tag 'Snake length:' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <%= number_field_tag 'snake_length', nil, in: 1...236 %>
       </div>
     </div>
     <div class="row command_label">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= label_tag 'Snake color:' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <%= color_field_tag 'snake_color' %>
       </div>
     </div>
   </div>
-  <div name="patterned_snake_params" id="patterned_snake_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "patterned_snake") %>
+  <div name="patterned_snake" id="patterned_snake" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= label_tag 'Number of loops:' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <%= number_field_tag 'num_reps', nil, in: 1...100 %>
       </div>
     </div>
   </div>
-  <div name="christmas_params" id="christmas_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "christmas") %>
+  <div name="christmas" id="christmas" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= label_tag 'Number of repetitions:' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <%= number_field_tag 'num_reps', nil, in: 1...100 %>
       </div>
     </div>
   </div>
-  <div name="dots_params" id="dots_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "moving_dots") %>
+  <div name="moving_dots" id="moving_dots" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= label_tag 'Number of repetitions:' %>
       </div>
-      <div class="col-md-1">
+      <div class="col-sm-1">
         <%= number_field_tag 'num_reps', nil, in: 1...100 %>
       </div>
     </div>
   </div>
-  <div name="lightshow_params" id="lightshow_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "lightshow") %>
+  <div name="lightshow" id="lightshow" class="command-form-params" style="display:none">
   </div>
-  <div name="middle_pulse_params" id="middle_pulse_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "middle_pulse") %>
+  <div name="middle_pulse" id="middle_pulse" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-md-2">
-        <%= label_tag 'Number of repetitions' %>
+      <div class="col-sm-2">
+        <%= label_tag 'Number of repetitions:' %>
       </div>
-      <div class="col-md-2">
+      <div class="col-sm-1">
         <%= number_field_tag 'num_reps', nil, in: 1...100 %>
       </div>
     </div>
     <div class="row command_label">
-      <div class="col-md-2">
-        <%= label_tag 'Color' %>
+      <div class="col-sm-2">
+        <%= label_tag 'Color:' %>
       </div>
-      <div class="col-md-2">
+      <div class="col-sm-1">
         <%= color_field_tag 'led_color' %>
       </div>
     </div>
   </div>
-  <div name="game_of_life_params" id="game_of_life_params" class="command-form-params" style="display:none">
-    <%= hidden_field_tag(:command, "game_of_life") %>
+  <div name="game_of_life" id="game_of_life" class="command-form-params" style="display:none">
     <div class="row command_label">
-      <div class="col-md-2">
-        <%= label_tag 'Number of repetitions' %>
+      <div class="col-sm-2">
+        <%= label_tag 'Number of cycles:' %>
       </div>
-      <div class="col-md-2">
+      <div class="col-sm-1">
         <%= number_field_tag 'num_reps', nil, in: 1...100 %>
       </div>
     </div>
   </div>
   <div class="command-execute">
-    <%= submit_tag("Execute", disabled: true, class: "run_command") %>
+    <%= submit_tag "Execute" %>
   </div>
 <% end %> <!-- form -->
 
 <script>
   $(function(){
-      $('#commands').change(function() {
+      $('#selected_command').change(function() {
         $('.command-form-params').hide();
+        $('.command-form-params').find("input").prop("disabled", true); 
         $('#' + $(this).val()).show();
+        $('#' + $(this).val()).find(":input").prop("disabled", false); 
       });
     });
 
   $(document).ready(function(){
-    $('#commands').trigger('change');
+    $('#selected_command').select2()
+    $('#selected_command').trigger('change');
   });
+
+
 
     
 </script>
