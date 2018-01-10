@@ -559,10 +559,9 @@ module Cord
       end 
     end
   
-    def big_rainbow
+    def rainbow(width)
       set_up_tree
             
-      stripe_width = 34
       @rainbow_colors = {
         0 => [148, 0, 211],
         1 => [75, 0, 130],
@@ -575,7 +574,7 @@ module Cord
 
       led_index = 0
       @rainbow_colors.each_with_index {|(k,v), c|
-          until c < @rainbow_colors.size - 1 && led_index == (c + 1) * stripe_width || led_index == @size do
+          until c < @rainbow_colors.size - 1 && led_index == (c + 1) * width || led_index == @size do
             color = v[0] * 256**2 + v[1] * 256 + v[2]
             self.send(@interfaces[led_index]+"=", color)
             self.save
