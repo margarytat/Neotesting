@@ -2,7 +2,7 @@ module CommandsHelper
 
   def get_commands 
     @commands = ["all_on", "all_off", "pattern", "rainbow", "snake", "patterned_snake", "christmas", "moving_dots", "light_show", "middle_pulse", "game_of_life"]
-    # @commands.sort
+    @commands.sort
   end
 
   def display_commands 
@@ -31,12 +31,15 @@ module CommandsHelper
         []
       when "rainbow"
         [num_field_row("Stripe width:", :stripe_width, 34)]
+      when "pattern"
+        [label_row("custom params not ready yet")]
       when "snake"
         arr = [num_field_row("Number of loops:", :num_reps_snake, 100)]
         arr << num_field_row("Snake length:", :snake_length, 236)
         arr << color_field_row("Snake color:", :snake_color)
       when "patterned_snake"
-        [num_field_row("Number of loops:", :num_reps_psnake, 100)]
+        [label_row("custom params not ready yet")]
+        # [num_field_row("Number of loops:", :num_reps_psnake, 100)]
       when "christmas"
         [num_field_row("Number of repetitions:", :num_reps_xmas, 100)]
       when "moving_dots" 
@@ -50,7 +53,7 @@ module CommandsHelper
         arr = [num_field_row("Number of repetitions:", :num_reps_pulse, 100)]
         arr << color_field_row("Color:", :pulse_color)
       when "game_of_life"
-        [num_field_row("Number of cycles:", :num_reps_life, 100)]
+        [label_row("custom params not ready yet")]
       else
         [wip_row]
       end
@@ -75,9 +78,13 @@ module CommandsHelper
     end
 
     def wip_row
+      label_row("Command \"#{@name}\" is a work in progress")
+    end
+
+    def label_row(content)
       content_tag :div, class: "row command_label" do 
         content_tag :div,  class: "col-sm-2" do 
-          label_tag "Command \"#{@name}\" is a work in progress"
+          label_tag content
         end
       end
     end

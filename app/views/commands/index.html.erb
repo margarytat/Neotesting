@@ -3,7 +3,7 @@
   <h1>Cord Commands</h1>
 </div>
 
-<%= form_with(url: new_command_path, html: {id: "commands-form", class: "form-horizontal"} ) do |f| %>
+<%= form_with(url: new_command_path, html: {id: "commands-form", method: :get, class: "form-horizontal"} ) do |f| %>
 
   <div class="row command_label">
     <div class="col-sm-1">
