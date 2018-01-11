@@ -17,6 +17,8 @@ class CommandsController < ApplicationController
       when "all_off"
         npx.all_off
       when "pattern"
+        # TODO: add options on the order in which the LEDs light up: 
+        # all at once; from head/tail/middle; other patterns
         # red 12910592 white 16777215 blue 255
         npx.custom_pattern([12910592, 12910592, 12910592, 16777215, 16777215, 16777215, 255, 255, 255])
       when "rainbow"
@@ -29,6 +31,7 @@ class CommandsController < ApplicationController
       when "christmas"
         npx.christmas(params[:num_reps_xmas])
       when "moving_dots" 
+        # TODO: add more options on how the dots move
         # moving_dots(reps, space, turn_off, color1, color2)
         c1 = get_code(params[:color1])
         c2 = get_code(params[:color2])

@@ -9,4 +9,5 @@ Apiotics.configure do |config|
   config.handshake = true
   config.local_logging = false
   config.reduced_metadata = true
+  config.redis_comms_connection = true
 end
