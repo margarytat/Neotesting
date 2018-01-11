@@ -1,8 +1,8 @@
 class CommandsController < ApplicationController
 
   def index
-
     @cords = ::Cord::Cord.all
+    @patterns = ::StaticPattern.all
   end
 
   def create
@@ -19,17 +19,18 @@ class CommandsController < ApplicationController
       when "pattern"
         # TODO: add options on the order in which the LEDs light up: 
         # all at once; from head/tail/middle; other patterns
-        # red 12910592 white 16777215 blue 255
-        npx.custom_pattern([12910592, 12910592, 12910592, 16777215, 16777215, 16777215, 255, 255, 255])
+        pat = ::StaticPattern.find(params["pattern"]["id"])
+        npx.custom_pattern(pat.led_colors)
       when "rainbow"
         npx.rainbow(params[:stripe_width].to_i)
       when "snake"
         npx.snake(params[:num_reps_snake].to_i, params[:snake_length].to_i, get_code(params[:snake_color]))
       when "patterned_snake"
-        npx.patterned_snake(2, [16711680, 16739328, 16773632, 65280, 65454, 255, 65379, 4275555, 10435939, 10456675, 10474339])
-        # n.patterned_snake(3, [[127,127,127], [127,0,127], [0,127,127], [127,127,0], [127,0,0], [0,127,0], [0,0,127], [63,127,31], [31,31,0], [0,63,90], [63,63,63]])
+        pat = ::StaticPattern.find(params["snake_pattern"]["id"])
+        npx.patterned_snake(params[:num_reps_psnake].to_i, pat.led_colors)
+        # npx.patterned_snake(2, [16711680, 16739328, 16773632, 65280, 65454, 255, 65379, 4275555, 10435939, 10456675, 10474339])
       when "christmas"
-        npx.christmas(params[:num_reps_xmas])
+        npx.christmas(params[:num_reps_xmas].to_i)
       when "moving_dots" 
         # TODO: add more options on how the dots move
         # moving_dots(reps, space, turn_off, color1, color2)

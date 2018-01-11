@@ -21,7 +21,7 @@ and the input boxes in the right column don't resize once all the horizontal pad
       </tr>
       <tr>
         <td>Size</td>
-        <td><%= f.input_field :size %></td>
+        <td><%= f.input_field :size, value: '240' %></td>
       </tr>
       <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
       <% (0..239).each do |i| %>
@@ -30,7 +30,7 @@ and the input boxes in the right column don't resize once all the horizontal pad
             <%= "pixel_#{i}" %>
           </td>
           <td>
-            <%= f.input_field :"pixel_#{i}" %>
+            <%= f.input_field :"pixel_#{i}", value: '0' %>
           </td>
         </tr>
       <% end %> <!-- (0..239).each -->

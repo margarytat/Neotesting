@@ -665,7 +665,7 @@ module Cord
       set_up_tree
       l = pattern.length
       unless l > @size-3
-        (0..l-1).each do |i|
+        (0...l).each do |i|
           self.send(@interfaces[i]+"=", pattern[i%l])
           self.save
           sleep(0.01)
@@ -673,7 +673,7 @@ module Cord
 
         h = l
         (reps*@size-l).times do 
-          (0..l-1).each do |p|
+          (0...l).each do |p|
             self.send(@interfaces[(h-p)%(@size)]+"=", pattern[p%l]) #braces around @size to assist Sublime with formatting
           end
           self.send(@interfaces[(h-l)%(@size)]+"=", 0  )

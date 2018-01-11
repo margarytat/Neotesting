@@ -484,4 +484,12 @@ class StaticPattern < ApplicationRecord
   validates :size, inclusion: { in: 1..240,
   message: "%{value} is not within the range 1..240" }
 
+  def led_colors
+    arr = Array.new
+    (0...size).each {|i|
+      arr << self.send("pixel_#{i}")
+    }
+    return arr
+  end
+
 end

@@ -32,14 +32,14 @@ module CommandsHelper
       when "rainbow"
         [num_field_row("Stripe width:", :stripe_width, 34)]
       when "pattern"
-        [label_row("custom params not ready yet")]
+        [pattern_selector_row("Pattern:", :pattern)]
       when "snake"
         arr = [num_field_row("Number of loops:", :num_reps_snake, 100)]
         arr << num_field_row("Snake length:", :snake_length, 236)
         arr << color_field_row("Snake color:", :snake_color)
       when "patterned_snake"
-        [label_row("custom params not ready yet")]
-        # [num_field_row("Number of loops:", :num_reps_psnake, 100)]
+        arr = [num_field_row("Number of loops:", :num_reps_psnake, 100)]
+        arr << pattern_selector_row("Snake pattern:", :snake_pattern)
       when "christmas"
         [num_field_row("Number of repetitions:", :num_reps_xmas, 100)]
       when "moving_dots" 
@@ -55,37 +55,39 @@ module CommandsHelper
       when "game_of_life"
         [label_row("custom params not ready yet")]
       else
-        [wip_row]
+        label_row("Command \"#{@name}\" is not ready yet")
       end
     end
 
+# instance_variable_get(:@instance_variable)
     private
     attr_accessor :view
-    delegate :content_tag, :number_field_tag, :color_field_tag, :label_tag, :concat, :safe_join, to: :view
+    delegate :instance_variable_get, :content_tag, :number_field_tag, :color_field_tag, :label_tag, :concat, :safe_join, :collection_select, to: :view
 
     def num_field_row(caption, param_name, max)
-      content_tag :div, class: "row command_label" do 
-        concat (content_tag :div, label_tag(caption),  class: "col-sm-2")
-        concat (content_tag :div, number_field_tag(param_name, nil, in: 1...max), class: "col-sm-1")
-      end
+      input_row(caption, number_field_tag(param_name, nil, in: 1...max))
     end
 
     def color_field_row(caption, param_name)
+      input_row(caption, color_field_tag(param_name))
+    end
+
+    def pattern_selector_row(caption, param_name)
+      options = instance_variable_get(:@patterns)
+      html = collection_select param_name, :id, options, :id, :name, include_blank: false
+      input_row(caption, html)
+    end
+
+    def input_row(caption, input_field_html)
       content_tag :div, class: "row command_label" do 
         concat (content_tag :div, label_tag(caption),  class: "col-sm-2")
-        concat (content_tag :div, color_field_tag(param_name), class: "col-sm-1")
+        concat (content_tag :div, input_field_html, class: "col-sm-1")
       end
     end
 
-    def wip_row
-      label_row("Command \"#{@name}\" is a work in progress")
-    end
-
-    def label_row(content)
+    def label_row(caption)
       content_tag :div, class: "row command_label" do 
-        content_tag :div,  class: "col-sm-2" do 
-          label_tag content
-        end
+        concat (content_tag :div, label_tag(caption),  class: "col-sm-2")
       end
     end
 
